@@ -12,7 +12,7 @@ name: 🧪Playwright Sanity Testing
 run-name: ${{github.actor}}👨🏻‍🔬 ran TestSuite in ${{github.ref_name}}
 on:
     push:
-        branches: ['GX3-114/upload-and-download'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+        branches: ['test/GX3-1507/upload-and-download'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
 
 jobs:
     TestSuite:
@@ -39,7 +39,7 @@ jobs:
 
             - name: ✅ 🧪Test Suite Execution
               run: | #!Cambiar solamente el ID de la US (ej: */**/GX-9*.ts)
-                  yarn test tests/elements/upload_download_GX3-114.test.ts
+                  yarn test tests/elements/upload_download_GX3-1507.test.ts
 
             - name: 📊Generate Allure Report
               run: |

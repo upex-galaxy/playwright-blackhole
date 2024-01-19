@@ -19,7 +19,7 @@
 	},
 	"cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
 	"cucumberautocomplete.stepRegExSymbol": "'",
-	"workbench.colorTheme": "Winter is Coming (Dark Blue)",
+	"workbench.colorTheme": "Dracula",
 	"cSpell.language": "en,es",
 	"terminal.integrated.defaultProfile.windows": "Git Bash",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -35,7 +35,7 @@
 	"[feature]": {
 		"editor.defaultFormatter": "alexkrechik.cucumberautocomplete"
 	},
-	"eslint.validate": ["typescript","javascript","ts", "js"],
+	"eslint.validate": ["typescript", "javascript", "ts", "js"],
 	"eslint.format.enable": true,
 	"eslint.codeAction.showDocumentation": {
 		"enable": true
@@ -69,7 +69,5 @@
 		"mockAutocomplete": false
 	},
 	"cSpell.autoFormatConfigFile": true,
-	"githubPullRequests.ignoredPullRequestBranches": [
-		"QA"
-	]
+	"githubPullRequests.ignoredPullRequestBranches": ["QA"]
 }

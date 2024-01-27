@@ -2,7 +2,7 @@ name: 🧪Playwright Sanity Testing
 run-name: ${{github.actor}}👨🏻‍🔬 ran TestSuite in ${{github.ref_name}}
 on:
   push:
-    branches: ['checkout -b GX3-1893-⚡️-tools-qa-elements-buttons'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+    branches: ['GX3-1893-⚡️-tools-qa-elements-buttons'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
 
 jobs:
   TestSuite:

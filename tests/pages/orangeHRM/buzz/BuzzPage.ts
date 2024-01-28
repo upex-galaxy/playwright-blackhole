@@ -1,26 +1,33 @@
-import { type Page, type Locator } from "@playwright/test";
+import { type Page, type Locator, expect } from "@playwright/test";
 
 export class BuzzPage {
-
     page: Page;
     likeButtons: () => Locator;
     commentButtons: () => Locator;
     shareButtons: () => Locator;
     firstLikeButton: () => Locator;
     likesCounter: () => Locator;
+    likeButtonsRedHeart: () => Locator;
 
     constructor(driver: Page) {
         this.page = driver;
-        this.likeButtons = () => this.page.locator('.orangehrm-buzz-post-actions svg');    //!hacerlo dinámico
+        this.likeButtons = () => this.page.locator('.orangehrm-buzz-post-actions div');    //!hacerlo dinámico
         this.commentButtons = () => this.page.locator('.orangehrm-buzz-post-actions button [class$="bi-chat-text-fill"]');
         this.shareButtons = () => this.page.locator('.orangehrm-buzz-post-actions button [class$="bi-share-fill"]');
-        // this.likesCounter = () => this.page.locator('.orangehrm-buzz-stats-row p');
     }
 
-    
+    async goToBuzzPage() { 
+        await this.page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/buzz/viewBuzz', { waitUntil: 'domcontentloaded' });
+        expect(this.page.url()).toContain('viewBuzz');
+    }
+
     async clickCommentButton() {
         const listCommentButtons = this.commentButtons();
         await listCommentButtons.first().click();
+    }
+
+    async isRedHeartVisible() { 
+        return await this.page.isVisible('.orangehrm-like-animation');
     }
 
     async clickLikeButton() {

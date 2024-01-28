@@ -1,3 +1,4 @@
+import { expect } from '@pages/TestBase';
 import { Page, Locator } from '@playwright/test';
 
 export class OrangeLoginPage {
@@ -25,9 +26,11 @@ export class OrangeLoginPage {
         await this.loginButton().click();
     }
 
-    async login(userNameValue: string, passwordValue: string) { 
+    async loginAndSubmit(userNameValue: string, passwordValue: string) { 
+        await this.page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login', { waitUntil: 'domcontentloaded' });
         await this.enterUserName(userNameValue);
         await this.enterPassword(passwordValue);
         await this.submitLogin();
+        expect(this.page.url()).toContain('index');
     }    
 }

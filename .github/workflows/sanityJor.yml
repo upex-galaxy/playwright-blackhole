@@ -2,7 +2,7 @@ name: 🧪Playwright Ely's Sanity Testing
 run-name: ${{github.actor}}👨🏻‍🔬 ran TestSuite in ${{github.ref_name}}
 on:
   push:
-    branches: ['test/GX3-1561/Upload-and-Download'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+    branches: ['test/GX3-1943/Book-a-Destination-in-Checkout'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
 
 jobs:
   TestSuite:
@@ -29,7 +29,7 @@ jobs:
 
     - name: ✅ 🧪Test Suite Execution
       run: | #!Cambiar el path del test a ejecutar
-        yarn test tests/elements/uploadDownload_GX3-1561.test.ts
+        yarn test playwright-blackhole/tests/specs/space_beyond/checkoutJor.test.ts
 
     - name: 📊Generate Allure Report
       if: always()
@@ -52,7 +52,7 @@ jobs:
         password: ${{secrets.XRAY_CLIENT_SECRET}}
         testFormat: 'junit'
         testPaths: 'playwright-report/importer-report.xml'
-        testExecKey: 'GX3-1568' #!Cambiar a tu TX correspondiente.
+        testExecKey: 'GX3-1947' #!Cambiar a tu TX correspondiente.
         projectKey: 'GX3' #!Cambiar a tu Proyecto Level correspondiente.
 
     - name: 🔔Slack Notification of Done

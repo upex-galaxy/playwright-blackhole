@@ -1,0 +1,21 @@
+{
+    "validData": {
+      "name": "Jor Abdo",
+      "email": "jorabdo@gmail.com",
+      "socialNumber": "763-33-4444",
+      "phoneNumber": "+12897323322"
+    },
+    "invalidData": {
+      "name": "",
+      "email": "@.com",
+      "socialNumber": "4444",
+      "phoneNumber": "323322"
+    },
+    "errorMsg":{
+      "name": "Name is a required field.",
+      "email": "Enter a valid e-mail address.",
+      "socialNumber": "Enter a valid Social Security number (xxx-xx-xxxx).",
+      "phoneNumber": "Enter a valid GB phone number."
+    }
+  }
+  

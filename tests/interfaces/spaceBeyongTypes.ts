@@ -14,3 +14,6 @@ export type ProductCardData = {
     desc: string,
     bookButton: Locator
 }
+export type btnCardData = {
+    bookButton: Locator
+}

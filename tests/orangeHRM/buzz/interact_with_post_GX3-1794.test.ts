@@ -14,18 +14,18 @@ story('GX3-1794: OrangeHRM | Buzz | Interact with post by Shares, Likes or Comme
         await buzzPage.goToBuzzPage();
     });
 
-    test('GX3-1799 | TC01:  Should click on the like button', async ({ page }) => { 
+    test('GX3-1799 | TC01: Should turn red the like button when clicking on it', async ({ page }) => { 
         const buzzPage = new BuzzPage(page);
         await buzzPage.clickLikeButton();
         expect(buzzPage.isRedHeartVisible()).toBeTruthy();
 
     });
-    test('GX3-1799 | TC02: Should make a comment in a post', async ({ page }) => { 
+    test('GX3-1799 | TC02: Should can comment successfully in a post when the Enter key is pressed in the textbox', async ({ page }) => { 
         const buzzPage = new BuzzPage(page);
         await buzzPage.clickCommentButton();
     });
 
-    test('GX3-1799 | TC03: Should share a post', async ({ page }) => { 
+    test('GX3-1799 | TC03: Should display a post when the "Share" button in the pop-up is clicked', async ({ page }) => { 
         const buzzPage = new BuzzPage(page);
         await buzzPage.clickShareButton();
     });

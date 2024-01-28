@@ -28,5 +28,9 @@ story('GX3-1794: OrangeHRM | Buzz | Interact with post by Shares, Likes or Comme
     test('GX3-1799 | TC03: Should display a post when the "Share" button in the pop-up is clicked', async ({ page }) => { 
         const buzzPage = new BuzzPage(page);
         await buzzPage.clickShareButton();
+        expect(buzzPage.sharePopUp()).toBeVisible();        
+        await buzzPage.clickshareButtonPopUp();
+        //! Falta la validación
+
     });
 })

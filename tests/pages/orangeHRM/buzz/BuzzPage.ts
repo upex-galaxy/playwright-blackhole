@@ -20,7 +20,7 @@ export class BuzzPage {
         this.shareButtons = () => this.page.locator('.orangehrm-buzz-post-actions button [class$="bi-share-fill"]');
         this.shareButtonPopUp = () => this.page.locator('[class$="orangehrm-buzz-post-modal-actions"] button');
         this.sharePopUp = () => this.page.locator('[class$="oxd-sheet--rounded oxd-sheet--white oxd-dialog-sheet oxd-dialog-sheet--shadow oxd-dialog-sheet--gutters orangehrm-dialog-modal"]');
-        this.shareSuccessfulMessage = () => this.page.locator('[class="oxd-toast oxd-toast-container--toast oxd-toast-list-leave-active oxd-toast-list-leave-to"]');
+        this.shareSuccessfulMessage = () => this.page.locator('[class*="oxd-text--toast-message"]');
         this.writeCommentInput = () => this.page.locator('[class="oxd-input-group oxd-input-field-bottom-space"] [class="oxd-input oxd-input--active"]');
     }
 

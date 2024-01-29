@@ -23,6 +23,7 @@ story('GX3-1794: OrangeHRM | Buzz | Interact with post by Shares, Likes or Comme
     test('GX3-1799 | TC02: Should can comment successfully in a post when the Enter key is pressed in the textbox', async ({ page }) => { 
         const buzzPage = new BuzzPage(page);
         await buzzPage.clickCommentButton();
+        // await buzzPage.writeYourComment('Hello !!!');
     });
 
     test('GX3-1799 | TC03: Should display a post when the "Share" button in the pop-up is clicked', async ({ page }) => { 
@@ -34,6 +35,8 @@ story('GX3-1794: OrangeHRM | Buzz | Interact with post by Shares, Likes or Comme
         const response = await buzzPage.interceptResponseAPISharePost('https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/buzz/shares');
         const statusCode = response.status();
         console.log(`The status code is: ${statusCode}`);
-        expect(statusCode).toBe(200);        
+        expect(statusCode).toBe(200);      
+        
+        
     });
 })

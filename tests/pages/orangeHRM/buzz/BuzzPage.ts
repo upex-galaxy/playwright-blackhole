@@ -11,6 +11,7 @@ export class BuzzPage {
     shareButtonPopUp: () => Locator;
     sharePopUp: () => Locator;
     shareSuccessfulMessage: () => Locator;
+    writeCommentInput: () => Locator;
 
     constructor(driver: Page) {
         this.page = driver;
@@ -20,6 +21,7 @@ export class BuzzPage {
         this.shareButtonPopUp = () => this.page.locator('[class$="orangehrm-buzz-post-modal-actions"] button');
         this.sharePopUp = () => this.page.locator('[class$="oxd-sheet--rounded oxd-sheet--white oxd-dialog-sheet oxd-dialog-sheet--shadow oxd-dialog-sheet--gutters orangehrm-dialog-modal"]');
         this.shareSuccessfulMessage = () => this.page.locator('[class="oxd-toast oxd-toast-container--toast oxd-toast-list-leave-active oxd-toast-list-leave-to"]');
+        this.writeCommentInput = () => this.page.locator('[class="oxd-input-group oxd-input-field-bottom-space"] [class="oxd-input oxd-input--active"]');
     }
 
     async goToBuzzPage() { 
@@ -41,7 +43,9 @@ export class BuzzPage {
         await listCommentButtons.first().click();
     }
 
-
+    async writeYourComment(comment: string) { 
+        await this.writeCommentInput().fill(comment);
+    }
 
     async clickShareButton() {
         const listShareButtons = this.shareButtons();
@@ -52,12 +56,6 @@ export class BuzzPage {
         const shareButtonPopUP = this.shareButtonPopUp();
         await shareButtonPopUP.click();
     }
-
-    
-    // async interceptResponseAPISharePost() {
-    //     const response = await waitForResponse('https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/buzz/shares');
-    //     const statusCode = response.status();
-    // }
     
     async interceptResponseAPISharePost(url: string): Promise < Response | undefined > {
         try {
@@ -66,6 +64,10 @@ export class BuzzPage {
             console.error(`Error waiting for request response: ${error}`);
             return undefined;
         }
+    }
+
+    async isVisibleConfirmationMessage() { 
+        
     }
     
 

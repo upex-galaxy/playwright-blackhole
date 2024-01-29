@@ -1,4 +1,4 @@
-import { type Page, type Locator, expect } from "@playwright/test";
+import { type Page, type Locator, expect, Response } from "@playwright/test";
 
 export class BuzzPage {
     page: Page;
@@ -51,6 +51,21 @@ export class BuzzPage {
     async clickshareButtonPopUp() { 
         const shareButtonPopUP = this.shareButtonPopUp();
         await shareButtonPopUP.click();
+    }
+
+    
+    // async interceptResponseAPISharePost() {
+    //     const response = await waitForResponse('https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/buzz/shares');
+    //     const statusCode = response.status();
+    // }
+    
+    async interceptResponseAPISharePost(url: string): Promise < Response | undefined > {
+        try {
+            return await this.page.waitForResponse(url);
+        } catch (error) {
+            console.error(`Error waiting for request response: ${error}`);
+            return undefined;
+        }
     }
     
 

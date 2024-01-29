@@ -44,7 +44,9 @@ export class BuzzPage {
     }
 
     async writeYourComment(comment: string) { 
+        // await this.writeCommentInput().click();
         await this.writeCommentInput().fill(comment);
+        await this.page.keyboard.press('Enter');
     }
 
     async clickShareButton() {

@@ -1,4 +1,4 @@
-import { type Page, type Locator, expect, Response } from "@playwright/test";
+import { type Page, type Locator, expect } from "@playwright/test";
 
 export class BuzzPage {
     page: Page;
@@ -44,7 +44,6 @@ export class BuzzPage {
     }
 
     async writeYourComment(comment: string) { 
-        // await this.writeCommentInput().click();
         await this.writeCommentInput().fill(comment);
         await this.page.keyboard.press('Enter');
     }
@@ -59,7 +58,7 @@ export class BuzzPage {
         await shareButtonPopUP.click();
     }
     
-    async interceptResponseAPI(url: string): Promise < Response | undefined > {
+    async interceptResponseAPI(url: string) {
         try {
             return await this.page.waitForResponse(url);
         } catch (error) {

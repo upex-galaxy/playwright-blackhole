@@ -20,13 +20,18 @@ story('GX3-1794: OrangeHRM | Buzz | Interact with post by Shares, Likes or Comme
         expect(buzzPage.isRedHeartVisible()).toBeTruthy();
 
     });
-    test.skip('GX3-1799 | TC02: Should can comment successfully in a post when the Enter key is pressed in the textbox', async ({ page }) => { 
+    test('GX3-1799 | TC02: Should can comment successfully in a post when the Enter key is pressed in the textbox', async ({ page }) => { 
         const buzzPage = new BuzzPage(page);
         await buzzPage.clickCommentButton();
-        await buzzPage.writeYourComment('HOLA');
+        await buzzPage.writeYourComment('Hi Dani 🩴');
 
         const enteredComment = await buzzPage.writeCommentInput().inputValue();
-        expect(enteredComment).toBe('HOLA');
+        expect(enteredComment).toBe('Hi Dani 🩴');
+
+        const response = await buzzPage.interceptResponseAPI('https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/buzz/shares/29/comments');
+        const statusCode = response.status();
+        console.log(`The status code is: ${statusCode}`);
+        expect(statusCode).toBe(200);
     });
 
     test('GX3-1799 | TC03: Should display a post when the "Share" button in the pop-up is clicked', async ({ page }) => { 
@@ -36,7 +41,7 @@ story('GX3-1794: OrangeHRM | Buzz | Interact with post by Shares, Likes or Comme
         await buzzPage.clickshareButtonPopUp();
         expect(buzzPage.shareSuccessfulMessage()).toHaveText('Successfully Saved');
 
-        const response = await buzzPage.interceptResponseAPISharePost('https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/buzz/shares');
+        const response = await buzzPage.interceptResponseAPI('https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/buzz/shares');
         const statusCode = response.status();
         console.log(`The status code is: ${statusCode}`);
         expect(statusCode).toBe(200);      

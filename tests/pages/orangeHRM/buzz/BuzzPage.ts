@@ -21,7 +21,7 @@ export class BuzzPage {
         this.shareButtonPopUp = () => this.page.locator('[class$="orangehrm-buzz-post-modal-actions"] button');
         this.sharePopUp = () => this.page.locator('[class$="oxd-sheet--rounded oxd-sheet--white oxd-dialog-sheet oxd-dialog-sheet--shadow oxd-dialog-sheet--gutters orangehrm-dialog-modal"]');
         this.shareSuccessfulMessage = () => this.page.locator('[class*="oxd-text--toast-message"]');
-        this.writeCommentInput = () => this.page.locator('[class="oxd-input-group oxd-input-field-bottom-space"] [class="oxd-input oxd-input--active"]');
+        this.writeCommentInput = () => this.page.locator('[class="orangehrm-buzz-comment-add"] form input');
     }
 
     async goToBuzzPage() { 
@@ -59,7 +59,7 @@ export class BuzzPage {
         await shareButtonPopUP.click();
     }
     
-    async interceptResponseAPISharePost(url: string): Promise < Response | undefined > {
+    async interceptResponseAPI(url: string): Promise < Response | undefined > {
         try {
             return await this.page.waitForResponse(url);
         } catch (error) {
@@ -68,9 +68,7 @@ export class BuzzPage {
         }
     }
 
-    async isVisibleConfirmationMessage() { 
-        
-    }
+    
     
 
 }

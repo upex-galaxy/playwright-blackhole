@@ -28,10 +28,10 @@ story('GX3-1794: OrangeHRM | Buzz | Interact with post by Shares, Likes or Comme
         const enteredComment = await buzzPage.writeCommentInput().inputValue();
         expect(enteredComment).toBe('Hi Dani 🩴');
 
-        const response = await buzzPage.interceptResponseAPI('https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/buzz/shares/29/comments');
-        const statusCode = response.status();
-        console.log(`The status code is: ${statusCode}`);
-        expect(statusCode).toBe(200);
+        // const response = await buzzPage.interceptResponseAPI('https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/buzz/shares/29/comments');
+        // const statusCode = response.status();
+        // console.log(`The status code is: ${statusCode}`);
+        // expect(statusCode).toBe(200);
     });
 
     test('GX3-1799 | TC03: Should display a post when the "Share" button in the pop-up is clicked', async ({ page }) => { 

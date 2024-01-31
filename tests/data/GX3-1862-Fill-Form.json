@@ -1,0 +1,39 @@
+[
+    {
+        "FullName": "Jhoanna Francia 1",
+        "Email": "Francia@gmail.com",
+        "CurrentAddress": "Av Alvarez Thomas 123",
+        "PermanentAddress":"Av Alvarez Thomas 123"
+    },
+    {
+        "FullName": "Jhoanna Francia 2",
+        "Email": "@gmail.com",
+        "CurrentAddress": "Av Alvarez Thomas 123",
+        "PermanentAddress":"Av Alvarez Thomas 123"
+    },
+    {
+        "FullName": "Jhoanna Francia 3",
+        "Email": "Francia@.com",
+        "CurrentAddress": "Av Alvarez Thomas 123",
+        "PermanentAddress":"Av Alvarez Thomas 123"
+    },
+    {
+        "FullName": "Jhoanna Francia 4",
+        "Email": "Francia@gmailcom",
+        "CurrentAddress": "Av Alvarez Thomas 123",
+        "PermanentAddress":"Av Alvarez Thomas 123"
+    },
+    {
+        "FullName": "Jhoanna Francia 5",
+        "Email": "Franciagmail.com",
+        "CurrentAddress": "Av Alvarez Thomas 123",
+        "PermanentAddress":"Av Alvarez Thomas 123"
+    },
+    {
+        "FullName": "Jhoanna Francia 6",
+        "Email": "Francia@gmail.c",
+        "CurrentAddress": "Av Alvarez Thomas 123",
+        "PermanentAddress":"Av Alvarez Thomas 123"
+    }
+    
+]

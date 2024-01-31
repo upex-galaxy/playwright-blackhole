@@ -9,14 +9,17 @@ export class SpaceLoginPage {
     usernameInput: ()=> Locator
     passwordInput: () => Locator;
     loginButton: () => Locator;
-
-
+    usernameButton: () => Locator;
+    logoutButton: () => Locator;
+    
     constructor(driver: Page) {
 
         this.page = driver
         this.usernameInput = () => getByReactTool('input', this.page, { hasText: 'Username' }).locator('[role=input]')
         this.passwordInput = () => getByReactTool('input', this.page, { hasText: 'Password' }).locator('[role=input]')
         this.loginButton = () => this.page.locator('[form="login"]')
+        this.usernameButton = () => getByReactTool('app-bar', this.page).locator('button')
+        this.logoutButton = () => getByReactTool('app-bar', this.page).locator('ul ul')
     }
 
     async enterUsername(usernameValue: string) {
@@ -27,6 +30,10 @@ export class SpaceLoginPage {
     }
     async submitLogin() {
         await this.loginButton().click()
+    }
+    async logoutPage() { 
+        await this.usernameButton().click()
+        await this.logoutButton().click()
     }
 
     //* Esto se conoce como un Shortcut o SharedSteps, como quieras decirle:

@@ -7,7 +7,8 @@ story('GX3-1794: OrangeHRM | Buzz | Interact with post by Shares, Likes or Comme
 	});
 
 	test('GX3-1799 | TC01: Should turn red the like button when clicking on it', async ({ buzzPage }) => { 
-		await buzzPage.clickLikeButton();
+		const givenPost = await buzzPage.getAnyPost();
+		await buzzPage.clickLikeButton(givenPost);
 		expect(buzzPage.isRedHeartVisible()).toBeTruthy();
 
 	});
@@ -23,11 +24,6 @@ story('GX3-1794: OrangeHRM | Buzz | Interact with post by Shares, Likes or Comme
 		await buzzPage.clickShareButton();
 		await expect(buzzPage.sharePopUp()).toBeVisible();        
 		await buzzPage.clickshareButtonPopUp();
-		await expect(buzzPage.shareSuccessfulMessage()).toHaveText('Successfully Saved');
-
-		// const response = await buzzPage.interceptResponseAPI('https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/buzz/shares');
-		// const statusCode = response.status();
-		// console.log(`The status code is: ${statusCode}`);
-		// expect(statusCode).toBe(200);      
+		await expect(buzzPage.shareSuccessfulMessage()).toHaveText('Guardado correctamente');    
 	});
 });

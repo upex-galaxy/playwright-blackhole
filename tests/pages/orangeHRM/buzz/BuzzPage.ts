@@ -17,7 +17,6 @@ export class BuzzPage {
 	constructor(driver: Page) {
 		this.page = driver;
 		this.postItem = () => this.page.locator('[class*="oxd-sheet--white orangehrm-buzz"]');
-
 		this.likeButtons = () => this.page.locator('.orangehrm-buzz-post-actions div svg');
 		this.commentButtons = () => this.page.locator('.orangehrm-buzz-post-actions button [class$="bi-chat-text-fill"]');
 		this.shareButtons = () => this.page.locator('.orangehrm-buzz-post-actions button [class$="bi-share-fill"]');

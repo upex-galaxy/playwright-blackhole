@@ -31,8 +31,8 @@ jobs:
       run: | #!Cambiar el path del test a ejecutar
         yarn test tests/specs/orangeHRM/buzz/interact_with_post_GX3-1794.test.ts
       env:
-        CI_OrangeHRM_Username: ${{secrets.CI_ORANGEHRM_USERNAME}}
-        CI_OrangeHRM_Password: ${{secrets.CI_ORANGEHRM_PASSWORD}}
+        CI_ORANGEHRM_USERNAME: ${{secrets.CI_ORANGEHRM_USERNAME}}
+        CI_ORANGEHRM_PASSWORD: ${{secrets.CI_ORANGEHRM_PASSWORD}}
 
     - name: 📊Generate Allure Report
 

@@ -4,6 +4,7 @@ story('GX3-1794: OrangeHRM | Buzz | Interact with post by Shares, Likes or Comme
 	precondition(async ({ buzzPage, orangeLoginPage }) => {
 		await orangeLoginPage.loginSuccess();
 		await buzzPage.goToBuzzPage();
+		await buzzPage.scrollToBottom();
 	});
 
 	test('GX3-1799 | TC01: Should turn red the like button when clicking on it', async ({ buzzPage }) => { 

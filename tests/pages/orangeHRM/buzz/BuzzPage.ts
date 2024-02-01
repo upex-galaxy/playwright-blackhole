@@ -59,8 +59,8 @@ export class BuzzPage {
 		return await this.page.isVisible('.orangehrm-like-animation');
 	}
 	
-	async clickCommentButton() {
-		const listCommentButtons = this.commentButtons();
+	async clickCommentButton(post: Locator) {	
+		const listCommentButtons = post.locator(this.commentButtons());
 		await listCommentButtons.first().click();
 	}
 

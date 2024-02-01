@@ -60,7 +60,7 @@ export class BuzzPage {
 	
 	async clickCommentButton(post: Locator) {	
 		const listCommentButtons = post.locator(this.commentButtons());
-		await listCommentButtons.first().click();
+		await listCommentButtons.click();
 	}
 
 	async writeYourComment(comment: string) { 
@@ -68,9 +68,9 @@ export class BuzzPage {
 		await this.page.keyboard.press('Enter');
 	}
 
-	async clickShareButton() {
-		const listShareButtons = this.shareButtons();
-		await listShareButtons.first().click();
+	async clickShareButton(share: Locator) {
+		const listShareButtons = share.locator(this.shareButtons());
+		await listShareButtons.click();
 	}
 
 	async clickshareButtonPopUp() { 
@@ -78,12 +78,12 @@ export class BuzzPage {
 		await shareButtonPopUP.click();
 	}
     
-	async interceptResponseAPI(url: string) {
-		try {
-			return await this.page.waitForResponse(url);
-		} catch (error) {
-			console.error(`Error waiting for request response: ${error}`);
-			return undefined;
-		}
-	}
+	// async interceptResponseAPI(url: string) {
+	// 	try {
+	// 		return await this.page.waitForResponse(url);
+	// 	} catch (error) {
+	// 		console.error(`Error waiting for request response: ${error}`);
+	// 		return undefined;
+	// 	}
+	// }
 }

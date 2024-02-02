@@ -3,8 +3,8 @@ import { Page, Locator } from '@playwright/test';
 import * as env from 'dotenv';
 env.config();
 
-const usedUsername = process.env.CI ? process.env.CI_ORANGEHRM_USERNAME : process.env.QA_OrangeHRM_Username;
-const usedPassword = process.env.CI ? process.env.CI_ORANGEHRM_PASSWORD : process.env.QA_OrangeHRM_Password;
+const usedUsername = process.env.CI ? process.env.CI_ORANGEHRM_USERNAME : process.env.QA_ORANGEHRM_USERNAME;
+const usedPassword = process.env.CI ? process.env.CI_ORANGEHRM_PASSWORD : process.env.QA_ORANGEHRM_PASSWORD;
 
 export class OrangeLoginPage {
 	page: Page; 

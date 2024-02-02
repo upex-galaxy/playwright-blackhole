@@ -39,7 +39,7 @@ jobs:
 
             - name: ✅ 🧪Test Suite Execution
               run: | #!Cambiar solamente el ID de la US (ej: */**/GX-9*.ts)
-                  yarn test */**/*US11*.test.ts
+                  yarn test */**/*GX3-1863*.test.ts
 
             - name: 📊Generate Allure Report
               run: |
@@ -61,5 +61,5 @@ jobs:
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit'
                   testPaths: 'playwright-report/importer-report.xml'
-                  testExecKey: 'GX3-4' #!Cambiar a tu TX correspondiente.
+                  testExecKey: 'GX3-1869' #!Cambiar a tu TX correspondiente.
                   projectKey: 'GX3' #!Cambiar a tu Proyecto Level correspondiente.

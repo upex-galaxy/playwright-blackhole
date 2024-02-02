@@ -40,6 +40,7 @@ export class OrangeLoginPage {
 
 	async loginSuccess(){
 		await this.page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login', { waitUntil: 'domcontentloaded' });
+		
 		await this.loginAndSubmit(usedUsername, usedPassword);
 	}
 }

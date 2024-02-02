@@ -3,6 +3,7 @@ import { story, test, precondition, expect } from '@pages/TestBaseIsa';
 story('GX3-1794: OrangeHRM | Buzz | Interact with post by Shares, Likes or Comments', () => {   
 	precondition(async ({ buzzPage, orangeLoginPage }) => {
 		await orangeLoginPage.loginSuccess();
+		await buzzPage.page.waitForTimeout(2000);
 		await buzzPage.goToBuzzPage();
 		await buzzPage.scrollToBottom();
 	});

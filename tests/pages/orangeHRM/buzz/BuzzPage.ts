@@ -29,7 +29,6 @@ export class BuzzPage {
 	}
 
 	async goToBuzzPage() { 
-		// await this.page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/buzz/viewBuzz', { waitUntil: 'domcontentloaded' });
 		await this.buzzMenu().click();
 		expect(this.page.url()).toContain('viewBuzz');
 	}
@@ -49,12 +48,12 @@ export class BuzzPage {
 		return givenPost;
 	}
 
-	async scrollToBottom() {
-		await this.page.evaluate(() => {
-			window.scrollTo(0, document.body.scrollHeight); // Scroll hasta el final de la página
-		});
-		await this.page.waitForTimeout(5000); // Esperar para que los nuevos posts se carguen después del scroll
-	}
+	// async scrollToBottom() {
+	// 	await this.page.evaluate(() => {
+	// 		window.scrollTo(0, document.body.scrollHeight); // Scroll hasta el final de la página
+	// 	});
+	// 	await this.page.waitForTimeout(5000); // Esperar para que los nuevos posts se carguen después del scroll
+	// }
 
 	async getPostByIndex(index: number) {
 		return this.postItem().nth(index);		

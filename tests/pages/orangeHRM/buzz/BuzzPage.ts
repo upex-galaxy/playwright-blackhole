@@ -13,9 +13,11 @@ export class BuzzPage {
 	shareSuccessfulMessage: () => Locator;
 	writeCommentInput: () => Locator;
 	postItem: () => Locator;
+	buzzMenu: () => Locator;
 
 	constructor(driver: Page) {
 		this.page = driver;
+		this.buzzMenu = () => this.page.locator('[class*="oxd-main-menu-item--name"]').getByText('Buzz');
 		this.postItem = () => this.page.locator('[class*="oxd-sheet--white orangehrm-buzz"]');
 		this.likeButtons = () => this.page.locator('.orangehrm-buzz-post-actions div svg');
 		this.commentButtons = () => this.page.locator('.orangehrm-buzz-post-actions button [class$="bi-chat-text-fill"]');
@@ -27,7 +29,8 @@ export class BuzzPage {
 	}
 
 	async goToBuzzPage() { 
-		await this.page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/buzz/viewBuzz', { waitUntil: 'domcontentloaded' });
+		// await this.page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/buzz/viewBuzz', { waitUntil: 'domcontentloaded' });
+		await this.buzzMenu().click();
 		expect(this.page.url()).toContain('viewBuzz');
 	}
 

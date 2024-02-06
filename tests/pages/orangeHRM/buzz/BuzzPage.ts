@@ -50,13 +50,6 @@ export class BuzzPage {
 		return givenPost;
 	}
 
-	// async scrollToBottom() {
-	// 	await this.page.evaluate(() => {
-	// 		window.scrollTo(0, document.body.scrollHeight); // Scroll hasta el final de la página
-	// 	});
-	// 	await this.page.waitForTimeout(5000); // Esperar para que los nuevos posts se carguen después del scroll
-	// }
-
 	async getPostByIndex(index: number) {
 		return this.postItem().nth(index);		
 	}

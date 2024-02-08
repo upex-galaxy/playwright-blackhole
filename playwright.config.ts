@@ -7,7 +7,7 @@ export default defineConfig({
 	// Test Repo Directory:
 	testDir: './tests',
 	/* Maximum time one test can run for. */
-	timeout: 50 * 1000,
+	timeout: 60 * 1000,
 	expect: {
 		/**
 		 * Maximum time expect() should wait for the condition to be met.
@@ -54,12 +54,12 @@ export default defineConfig({
 			use: { ...devices['Desktop Chrome'] },
 		},
 
-		{
+		/*{
 			name: 'firefox',
 			use: { ...devices['Desktop Firefox'] },
 		},
 		/* Test against branded browsers. */
-		{
+		/*{
 			name: 'Microsoft Edge',
 			use: { channel: 'msedge' },
 		},

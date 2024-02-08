@@ -12,7 +12,7 @@ name: 🧪Playwright Sanity Testing
 run-name: ${{github.actor}}👨🏻‍🔬 ran TestSuite in ${{github.ref_name}}
 on:
     push:
-        branches: ['TuBranchAqui'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+        branches: ['test/GX3-1862/text-box-fill-form-and-submit'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
 
 jobs:
     TestSuite:
@@ -39,7 +39,7 @@ jobs:
 
             - name: ✅ 🧪Test Suite Execution
               run: | #!Cambiar solamente el ID de la US (ej: */**/GX-9*.ts)
-                  yarn test */**/*GX3-1863*.test.ts
+                  yarn test tests/elements/form_GX3-1862.test.ts
 
             - name: 📊Generate Allure Report
               run: |

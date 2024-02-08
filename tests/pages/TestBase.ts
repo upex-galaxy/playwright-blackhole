@@ -1,33 +1,28 @@
-import { LoginPage } from '@pages/LoginPage';
-import { ChallengesLPage } from '@pages/ChallengesLPage';
-import { Debugger } from '@helper/debugger';
-
-import { test as driver, request } from '@playwright/test';
+import { test as driver } from '@playwright/test';
+import { SpaceLoginPage } from './SpaceLoginPage';
+import { SpaceProductPage } from './SpaceProductPage';
+import { SpaceCheckoutPage } from './SpaceCheckoutPage';
+import { TrelloBoards } from '@api/elyTrelloBoards';
+import { OrangeLoginPage } from './OrangeLoginPage';
 
 const test = driver.extend<{
-	chalPage: ChallengesLPage;
-	login: LoginPage;
-	debug: Debugger;
+	loginPage: SpaceLoginPage;
+	productPage: SpaceProductPage;
+	checkoutPage: SpaceCheckoutPage;
+	apiBoards: TrelloBoards;
+	orangeLoginPage: OrangeLoginPage;
 }>({
-	//todo: Le digo a PW que use los PageObjects con una nueva instancia (new):
-	//* Cada vez que llame el nombre de la variable,
-	//* se activa la función asíncrona que usa una nueva instancia del PageObject Importado.
-	chalPage: async ({ page }, use) => {
-		await use(new ChallengesLPage(page));
-	},
-	login: async ({ page }, use) => {
-		await use(new LoginPage(page));
-	},
-	debug: async ({ page }, use) => {
-		await use(new Debugger(page));
-	},
+	loginPage: async ({ page }, use) => await use(new SpaceLoginPage(page)),
+	orangeLoginPage: async ({ page }, use) => await use(new OrangeLoginPage(page)),
+	productPage: async ({ page }, use) => await use(new SpaceProductPage(page)),
+	checkoutPage: async ({ page }, use) => await use(new SpaceCheckoutPage(page)),
+	apiBoards: async ({ page }, use) => await use(new TrelloBoards(page)),
 });
 
 export { test };
 // Main utilities:
 export const story = test.describe;
 export const expect = test.expect;
-export const api = request;
 // Hooks:
 export const beforeAll = test.beforeAll;
 export const precondition = test.beforeEach;

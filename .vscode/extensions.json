@@ -1,12 +1,14 @@
 {
 	"recommendations": [
-		//* Themes:
-		"vscode-icons-team.vscode-icons",
+		//! Themes:
+		"miguelsolorio.fluent-icons",
 		"PKief.material-icon-theme",
-		"sdras.night-owl",
-		"ahmadawais.shades-of-purple",
+		"EliverLara.andromeda",
 		"johnpapa.winteriscoming",
-		//* Helper:
+		"RobbOwen.synthwave-vscode",
+		"dracula-theme.theme-dracula",
+		"zhuangtongfa.material-theme",
+		//! Helper:
 		"leizongmin.node-module-intellisense",
 		"christian-kohler.npm-intellisense",
 		"christian-kohler.path-intellisense",
@@ -17,29 +19,27 @@
 		"rssowl.copy-relative-path-posix",
 		"usernamehw.errorlens",
 		"kisstkondoros.vscode-gutter-preview",
+		"formulahendry.code-runner",
+		"yoavbls.pretty-ts-errors",
 		"adpyke.codesnap",
-		//* Formatters:
+		//! Formatters:
 		"dbaeumer.vscode-eslint",
 		"esbenp.prettier-vscode",
 		"rvest.vs-code-prettier-eslint",
-		//* Git Controls:
+		"alexkrechik.cucumberautocomplete",
+		"kennylong.kubernetes-yaml-formatter",
+		//! Git Controls:
 		"mhutchie.git-graph",
 		"donjayamanne.githistory",
-		"cschleiden.vscode-github-actions",
 		"eamodio.gitlens",
-		//* Actionables:
-		"formulahendry.code-runner",
-		//* General Frameworks:
+		//! General Frameworks:
 		"CucumberOpen.cucumber-official",
-		"alexkrechik.cucumberautocomplete",
 		"ms-vscode.vscode-typescript-next",
-		"yoavbls.pretty-ts-errors",
 		"xabikos.JavaScriptSnippets",
-		//* Project main Framework:
-		"deepakkamboj0121.vscode-playwright-test-snippets",
-		"ortoni.ortoni",
-		"nitayneeman.playwright-snippets",
+		//! Project main Framework Extensions:
 		"ms-playwright.playwright",
+		"ryanrosello-og.playwright-vscode-trace-viewer",
+		"nitayneeman.playwright-snippets",
 		"mskelton.playwright-test-snippets"
 	]
 }

@@ -2,12 +2,20 @@ import { defineConfig, devices } from '@playwright/test';
 import * as dotenv from 'dotenv';
 // See https://github.com/motdotla/dotenv
 dotenv.config();
+// Example using Setup/TearDown Precondition: https://playwright.dev/docs/test-global-setup-teardown
+export const STORAGE_STATE = 'tests/helper/auth/user.json';
+
+
 // See https://playwright.dev/docs/test-configuration.
 export default defineConfig({
 	// Test Repo Directory:
 	testDir: './tests',
 	/* Maximum time one test can run for. */
+<<<<<<< HEAD
 	timeout: 60 * 1000,
+=======
+	timeout: 40 * 1000,
+>>>>>>> 1430474ae2453d90664b92fb7fa574cb8ba810f2
 	expect: {
 		/**
 		 * Maximum time expect() should wait for the condition to be met.
@@ -24,12 +32,12 @@ export default defineConfig({
 	/* Retry on CI only */
 	retries: process.env.CI ? 2 : 0,
 	/* Opt out of parallel tests on CI. Workers are kinda flaky! not prefer to use them */
-	workers: process.env.CI ? 1 : 1,
+	workers: process.env.CI ? 4 : 1,
 	/* Reporter to use. See https://playwright.dev/docs/test-reporters */
 	reporter: [
 		['./tests/custom-reporter.ts'],
-		['html'],
-		['junit', { outputFolder: 'playwright-report', outputFile: 'playwright-report/importer-report.xml' }],
+		['html', { outputFolder: 'test-html-report/main', open: 'never' }],
+		['junit', { outputFolder: 'test-junit-report', outputFile: 'test-junit-report/main-importer-report.xml' }],
 		['allure-playwright'],
 	],
 	/* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -50,28 +58,37 @@ export default defineConfig({
 	/* Configure projects for major browsers */
 	projects: [
 		{
-			name: 'chromium',
-			use: { ...devices['Desktop Chrome'] },
+			name: 'setup',
+			testMatch: /.*\.(test)\.(setup)\.(js|ts)/,
 		},
-
+		{
+			name: 'chromium',
+			use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+		},
 		{
 			name: 'firefox',
 			use: { ...devices['Desktop Firefox'] },
 		},
-		/* Test against branded browsers. */
+		//* Test against branded browsers:
 		{
-			name: 'Microsoft Edge',
-			use: { channel: 'msedge' },
+			name: 'edge',
+			use: { ...devices['Desktop Edge'], channel: 'msedge' },
 		},
-		/* Test against mobile viewports. */
-		// {
-		//   name: 'Mobile Chrome',
-		//   use: { ...devices['Pixel 5'] },
-		// },
-		// {
-		//   name: 'Mobile Safari',
-		//   use: { ...devices['iPhone 12'] },
-		// },
+		//* Test against mobile Devices:
+		{
+			name: 'iphone',
+			use: { ...devices['iPhone 14 Pro'] },
+		},
+		{
+			name: 'super-precondition-example',
+			testMatch: /.*\.(test)\.(prc)\.(js|ts)/,
+			use: { 
+				...devices['Desktop Chrome'], 
+				channel: 'chrome', 
+				storageState: STORAGE_STATE,
+			},
+			dependencies: ['setup'],
+		},
 	],
 
 	/* Folder for test artifacts such as screenshots, videos, traces, etc. */

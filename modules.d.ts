@@ -1,9 +1,16 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 declare namespace NodeJS {
 	export interface ProcessEnv {
-		example_username: 'Playwright';
-		example_password: 'coderplaywright2023';
-		example_request: '/backend/requests/challenges/get_completed.php';
-		example_endpoint_login: '/sl';
-		example_endpoint_challenges: '/challenges';
+		SPACE_LOGIN_USERNAME: string
+		SPACE_LOGIN_PASSWORD: string
+		TRELLO_API_TOKEN: string
+		TRELLO_API_CI_TOKEN: string
+		TRELLO_API_KEY: string
+		TRELLO_API_CI_KEY: string
+		TRELLO_ENV_QA_BASEURL: string
+		TRELLO_ENV_CI_BASEURL: string
+		ORANGE_USERNAME: string
+		ORANGE_PASSWORD: string
+		AZURE_TOKEN: string
 	}
 }

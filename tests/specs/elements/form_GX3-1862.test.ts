@@ -1,7 +1,7 @@
 import { story, precondition, test, expect } from '@TestBase';
 import data from '@data/GX3-1862-Fill-Form.json' assert { type: 'json' };
-import { getRealValues } from '@helper/TestUtils';
-import type { simpleForm } from '@type/inputTypes';
+import { getRealValues } from '@helper/testUtils';
+import type { SimpleForm } from '@type/inputTypes';
 
 story('ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 	precondition(async ({ page }) => {
@@ -51,7 +51,7 @@ story('ToolsQA | Elements | Text Box: Fill form and Submit', () => {
 		const currentInput = page.locator('#currentAddress-wrapper textarea');
 		const permanentInput = page.locator('#permanentAddress-wrapper textarea');
 
-		async function fillForm(datos: simpleForm) {
+		async function fillForm(datos: SimpleForm) {
 			await usernameInput.fill(datos.fullName);
 			await emailInput.fill(datos.email);
 			await currentInput.fill(datos.currentAddress);

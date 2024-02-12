@@ -1,10 +1,11 @@
 import { story, test, precondition, expect } from '@pages/TestBaseIsa';
 
 story('GX3-1794: OrangeHRM | Buzz | Interact with post by Shares, Likes or Comments', () => {   
-	precondition(async ({ buzzPage, orangeLoginPage }) => {
+	precondition(async ({ buzzPage, orangeLoginPage, page }) => {
 		await orangeLoginPage.loginSuccess();
+		expect(page.url()).toContain('index');
 		await buzzPage.goToBuzzPage();
-		// expect(page.url()).toContain('viewBuzz');
+		expect(page.url()).toContain('viewBuzz');
 	});
 
 	test('GX3-1799 | TC01: Should turn red the like button when clicking on it', async ({ buzzPage }) => { 

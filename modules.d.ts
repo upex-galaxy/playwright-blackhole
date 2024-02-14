@@ -13,5 +13,8 @@ declare namespace NodeJS {
 		QA_ORANGEHRM_PASSWORD: string
 		CI_ORANGEHRM_USERNAME: string
 		CI_ORANGEHRM_PASSWORD: string
+		ORANGE_USERNAME: string
+		ORANGE_PASSWORD: string
+		AZURE_TOKEN: string
 	}
 }

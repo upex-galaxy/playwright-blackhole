@@ -5,22 +5,16 @@ export class BuzzPage {
 	likeButtons: () => Locator;
 	commentButtons: () => Locator;
 	shareButtons: () => Locator;
-	firstLikeButton: () => Locator;
-	likesCounter: () => Locator;
-	likeButtonsRedHeart: () => Locator;
 	shareButtonPopUp: () => Locator;
 	sharePopUp: () => Locator;
 	shareSuccessfulMessage: () => Locator;
 	writeCommentInput: () => Locator;
 	postItem: () => Locator;
-	buzzMenuButtton: () => Locator;
+	selectMenuButtton: (menuName: string) => Locator;
 
 	constructor(driver: Page) {
 		this.page = driver;
-		this.buzzMenuButtton = () => this.page.locator('[class="oxd-text oxd-text--span.oxd-main-menu-item--name"]').getByText('Buzz');
-		// this.buzzMenuButtton = () => this.page.locator('[class="oxd-main-menu-item"]').getByText('Buzz');
-		// this.buzzMenuButtton = () => this.page.locator('[class="oxd-main-menu-item active"]').getByText('Buzz');
-		// this.buzzMenuButtton = () => this.page.locator('[class="oxd-main-menu-item-wrapper"] [class*="active"] span');
+		this.selectMenuButtton = menuName => this.page.locator(`[class="oxd-main-menu-item-wrapper"] [href*="${menuName}"]`);
 		this.postItem = () => this.page.locator('[class*="oxd-sheet--white orangehrm-buzz"]:not([class*="gutters"])');
 		this.likeButtons = () => this.page.locator('.orangehrm-buzz-post-actions div svg');
 		this.commentButtons = () => this.page.locator('.orangehrm-buzz-post-actions button [class$="bi-chat-text-fill"]');
@@ -31,8 +25,8 @@ export class BuzzPage {
 		this.writeCommentInput = () => this.page.locator('[class="orangehrm-buzz-comment-add"] form input');
 	}
 
-	async goToBuzzPage() { 
-		await this.page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/buzz/viewBuzz', { waitUntil: 'domcontentloaded' });
+	async goToBuzzPage(nameMenu: string) { 
+		await this.selectMenuButtton(nameMenu).click();
 	}
 
 	async getAnyPost() {
@@ -81,13 +75,4 @@ export class BuzzPage {
 		const shareButtonPopUP = this.shareButtonPopUp();
 		await shareButtonPopUP.click();
 	}
-    
-	// async interceptResponseAPI(url: string) {
-	// 	try {
-	// 		return await this.page.waitForResponse(url);
-	// 	} catch (error) {
-	// 		console.error(`Error waiting for request response: ${error}`);
-	// 		return undefined;
-	// 	}
-	// }
 }

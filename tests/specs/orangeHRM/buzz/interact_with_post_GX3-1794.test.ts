@@ -4,7 +4,7 @@ story('GX3-1794: OrangeHRM | Buzz | Interact with post by Shares, Likes or Comme
 	precondition(async ({ buzzPage, orangeLoginPage, page }) => {
 		await orangeLoginPage.loginSuccess();
 		expect(page.url()).toContain('index');
-		await buzzPage.goToBuzzPage();
+		await buzzPage.goToBuzzPage('viewBuzz');
 		expect(page.url()).toContain('viewBuzz');
 	});
 

@@ -21,7 +21,7 @@ export class BuzzPage {
 		// this.buzzMenuButtton = () => this.page.locator('[class="oxd-main-menu-item"]').getByText('Buzz');
 		// this.buzzMenuButtton = () => this.page.locator('[class="oxd-main-menu-item active"]').getByText('Buzz');
 		// this.buzzMenuButtton = () => this.page.locator('[class="oxd-main-menu-item-wrapper"] [class*="active"] span');
-		this.postItem = () => this.page.locator('[class*="oxd-sheet--white orangehrm-buzz"]');
+		this.postItem = () => this.page.locator('[class*="oxd-sheet--white orangehrm-buzz"]:not([class*="gutters"])');
 		this.likeButtons = () => this.page.locator('.orangehrm-buzz-post-actions div svg');
 		this.commentButtons = () => this.page.locator('.orangehrm-buzz-post-actions button [class$="bi-chat-text-fill"]');
 		this.shareButtons = () => this.page.locator('.orangehrm-buzz-post-actions button [class$="bi-share-fill"]');
@@ -43,7 +43,7 @@ export class BuzzPage {
 		const visiblePost = await posts.count();
 		console.log('- La cantidad de post visibles es: ' + visiblePost);
 
-		const selectedIndex = Math.floor(Math.random() * visiblePost);
+		const selectedIndex = Math.floor(Math.random() * visiblePost -1);
 		const givenPost = await this.getPostByIndex(selectedIndex);
 		console.log('- El localizador del post para dar like es: ' + givenPost);
 

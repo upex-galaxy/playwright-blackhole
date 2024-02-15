@@ -1,5 +1,4 @@
 import { type Page, type Locator } from '@playwright/test';
-
 export class BuzzPage {
 	page: Page;
 	likeButtons: () => Locator;

@@ -12,7 +12,6 @@ story('GX3-1794: OrangeHRM | Buzz | Interact with post by Shares, Likes or Comme
 		const givenPost = await buzzPage.getAnyPost();
 		await buzzPage.clickLikeButton(givenPost);
 		expect(buzzPage.isRedHeartVisible()).toBeTruthy();
-
 	});
 	test('GX3-1799 | TC02: Should can comment successfully in a post when the Enter key is pressed in the textbox', async ({ buzzPage }) => { 
 		const givenPost = await buzzPage.getAnyPost();

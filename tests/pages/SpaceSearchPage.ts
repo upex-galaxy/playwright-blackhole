@@ -22,12 +22,10 @@ export class SpaceSearchPage {
 	constructor(driver: Page) {
 		this.page = driver;
 		this.searchPanel = () => this.page.locator('section[class*=Hero]');
-		this.datePicker = (option?: 'Departing' | 'Returning' | undefined) =>
-			this.page.locator('[data-react-toolbox=date-picker]', { hasText: option });
+		this.datePicker = (option?: 'Departing' | 'Returning' | undefined) => this.page.locator('[data-react-toolbox=date-picker]', { hasText: option });
 		this.departingPickerInput = () => this.datePicker('Departing').locator('input');
 		this.returningPickerInput = () => this.datePicker('Returning').locator('input');
-		this.dropdownOptions = (option?: 'Adults' | 'Children' | undefined) =>
-			this.page.locator('[data-react-toolbox=dropdown]', { hasText: option });
+		this.dropdownOptions = (option?: 'Adults' | 'Children' | undefined) => this.page.locator('[data-react-toolbox=dropdown]', { hasText: option });
 		this.adultsPickerInput = () => this.dropdownOptions('Adults').locator('input');
 		this.adultsPickerOptions = () => this.dropdownOptions('Adults').locator('ul');
 		this.childrenPickerInput = () => this.dropdownOptions('Children').locator('input');
@@ -65,9 +63,8 @@ export class SpaceSearchPage {
 		const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 		if (monthToSelect) {
 			const actualMonth = await this.monthTitle().innerText();
-			if (actualMonth.includes(monthToSelect)) {
-				return;
-			} else {
+			if (actualMonth.includes(monthToSelect)) return;
+			else {
 				const selectedMonth = months.indexOf(actualMonth.split(' ')[0]);
 				const leftMonths = months.slice(0, selectedMonth);
 				const rightMonths = months.slice(selectedMonth + 1);

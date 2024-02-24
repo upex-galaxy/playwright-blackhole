@@ -1,20 +1,44 @@
-import { type Locator, type Page, expect, } from '@playwright/test';
+import { type Locator, type Page, } from '@playwright/test';
 import * as dotenv from 'dotenv';
+import { ReactPage } from './ReactPage';
 
-export class SelectDestination {
+export class SpaceDestinationPage extends ReactPage {
 	page: Page;
 	selectDestinationbtn: () => Locator;
 	dropdownLaunch: () => Locator;
 	dropdownlaunchbtn: () => Locator;
 	dropdownplanet: () => Locator;
 	dropdownplanetbtn: () => Locator;
+	selectLauchbtn: () => Locator;
+	selectplanetbtn: () => Locator;
+	dropdownpicker: () => Locator;
+	dropdownOptions: (option?: 'Launch' | undefined) => Locator;
 
 	constructor( driver:Page ) {
+		super(driver);
 		this.page = driver;
-		this.selectDestinationbtn = () => this.page.locator('[data-react-toolbox="button"]' , { hasText: 'Select Destination' });
-		this.dropdownLaunch = () => this.page.locator('[data-react-toolbox="dropdown"]', { hasText: 'Launch' });
-		this.dropdownlaunchbtn = () => this.page.locator('.theme__values___1jS4g').nth(2);
-		this.dropdownplanet = () => this.page.locator('[data-react-toolbox="dropdown"]', { hasText: 'Planet color' });
-		this.dropdownplanetbtn = () => this.page.locator('.theme__values___1jS4g').nth(3);
+		this.selectDestinationbtn = () => this.getByReactTool('button' , { hasText: 'Select Destination' });
+		this.dropdownLaunch = () => this.getByReactTool('dropdown', { hasText: 'Launch' });
+		this.dropdownlaunchbtn = () => this.page.locator('[class*=theme__values]').nth(2);
+		this.dropdownOptions = (option?: 'Launch'| undefined) => this.page.locator('[class*=theme__values]', { hasText: option });
+		this.dropdownpicker = () => this.dropdownlaunchbtn('Launch').locator('ul');
+		this.selectLauchbtn = () => this.dropdownlaunchbtn().getByText('Tongli');
+		this.dropdownplanet = () => this.getByReactTool('dropdown' , { hasText: 'Planet color' } );
+		this.dropdownplanetbtn = () => this.page.locator('[class*=theme__values]').nth(3);
+		this.selectplanetbtn = () => this.dropdownplanetbtn().getByText('Blue');
 	}
+
+	async selectDestination() {
+		await this.selectDestinationbtn().click();
+		await this.dropdownLaunch().click();
+		await this.selectLauchbtn().click();
+		await this.dropdownplanet().click();
+		await this.selectplanetbtn().click();
+	}
+	async selectradomdestination() {
+		const countLauch = await this.dropdownlaunchbtn().count();
+		const mathLauch = Math.floor(Math.random() * countLauch);
+		return this.dropdownlaunchbtn().nth(mathLauch);
+	}
+
 }

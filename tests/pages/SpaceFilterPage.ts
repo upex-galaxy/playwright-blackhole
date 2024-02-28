@@ -15,8 +15,8 @@ export class SpaceFilterPage extends ReactPage {
 		await this.sliderPicker().hover();
 		const sliderPicker = await this.sliderPicker().elementHandle();
 
-		const domReact = await this.page.evaluate((mamamia) => {
-			const element = mamamia as HTMLElement; 
+		const domReact = await this.page.evaluate(mamamia => {
+			const element = mamamia as HTMLElement;
 			return element.getBoundingClientRect();
 		}, sliderPicker);
 

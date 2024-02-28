@@ -14,7 +14,7 @@ const test = driver.extend<{
 	apiBoards: TrelloBoards;
 	orangeLoginPage: OrangeLoginPage;
 	searchPage: SpaceSearchPage;
-	filterPage: SpaceFilterPage
+	filterPage: SpaceFilterPage;
 }>({
 	loginPage: async ({ page }, use) => await use(new SpaceLoginPage(page)),
 	searchPage: async ({ page }, use) => await use(new SpaceSearchPage(page)),

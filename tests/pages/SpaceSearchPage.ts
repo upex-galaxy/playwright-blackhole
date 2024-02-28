@@ -45,21 +45,7 @@ export class SpaceSearchPage {
 		await expect(this.datePickerPopup()).toBeVisible();
 	}
 
-	async selectMonth(
-		monthToSelect?:
-			| 'January'
-			| 'February'
-			| 'March'
-			| 'April'
-			| 'May'
-			| 'June'
-			| 'July'
-			| 'August'
-			| 'September'
-			| 'October'
-			| 'November'
-			| 'December'
-	) {
+	async selectMonth(monthToSelect?: 'January' | 'February' | 'March' | 'April' | 'May' | 'June' | 'July' | 'August' | 'September' | 'October' | 'November' | 'December') {
 		const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 		if (monthToSelect) {
 			const actualMonth = await this.monthTitle().innerText();

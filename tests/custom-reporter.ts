@@ -42,27 +42,16 @@ class MyReporter implements Reporter {
 	onTestBegin(test: TestCase) {
 		this.totalRetries = test.retries; // 2
 		const runningTestFound = this.runningTests.find(({ id }) => id === test.id);
-		if(!runningTestFound) throw new Error('Test not found in runningTests');
+		if (!runningTestFound) throw new Error('Test not found in runningTests');
 		const runningTestCase = runningTestFound;
 		const testNumber = this.runningTests.indexOf(runningTestCase) + 1;
 		let testWorker = '';
 		if (this.parallelTests) testWorker = ` (worker: ${test.results[0].workerIndex + 1})`;
-		if (test.expectedStatus === 'skipped') 
-			console.log('\n\x1b[90m%s\x1b[0m', `🔧${testWorker} Skipped Test [${testNumber}/${this.totalTests}] => ${runningTestCase.title}`);
+		if (test.expectedStatus === 'skipped') console.log('\n\x1b[90m%s\x1b[0m', `🔧${testWorker} Skipped Test [${testNumber}/${this.totalTests}] => ${runningTestCase.title}`);
 		else {
 			const testRetry = runningTestCase.results[0].retry;
-			if (testRetry === 0)
-				console.log(
-					'\n\x1b[34m%s\x1b[0m',
-					`🧪${testWorker} Running Test [${testNumber}/${this.totalTests}] => ${runningTestCase.title}`
-				);
-			if (testRetry >= 1) 
-				console.log(
-					'\n\x1b[34m%s\x1b[0m',
-					`🧪${testWorker} Running Test [${testNumber}/${this.totalTests}] => ${runningTestCase.title}`,
-					`💫 Retry #${testRetry}`
-				);
-			
+			if (testRetry === 0) console.log('\n\x1b[34m%s\x1b[0m', `🧪${testWorker} Running Test [${testNumber}/${this.totalTests}] => ${runningTestCase.title}`);
+			if (testRetry >= 1) console.log('\n\x1b[34m%s\x1b[0m', `🧪${testWorker} Running Test [${testNumber}/${this.totalTests}] => ${runningTestCase.title}`, `💫 Retry #${testRetry}`);
 		}
 		const testData = {
 			testID: test.id,
@@ -85,7 +74,7 @@ class MyReporter implements Reporter {
 
 	onStepEnd(test: TestCase, result: TestResult, step: TestStep) {
 		const testRun = this.testResults.find(({ testID }) => testID === test.id);
-		if(!testRun) throw new Error('Test not found in testResults');
+		if (!testRun) throw new Error('Test not found in testResults');
 		const testRunNumber = `[${testRun.testNumber}/${this.totalTests}]`;
 		const testName = this.parallelTests ? ` -- ${testRunNumber}${test.title}` : '';
 		test.expectedStatus;
@@ -100,9 +89,8 @@ class MyReporter implements Reporter {
 				}
 				if (step.error.message) console.log('\x1b[31m%s\x1b[0m', '---- 🔴 Error:', step.error.message);
 				console.log('\x1b[31m%s\x1b[0m', '---- ✔️ File:', step.titlePath()[2]);
-			} else 
-				console.log('\x1b[32m%s\x1b[0m', `---- step passed ✅ [${step.duration}ms]${testName}`);
-			
+			} else console.log('\x1b[32m%s\x1b[0m', `---- step passed ✅ [${step.duration}ms]${testName}`);
+
 			console.groupEnd();
 			console.groupEnd();
 		}
@@ -110,7 +98,7 @@ class MyReporter implements Reporter {
 
 	onTestEnd(test: TestCase, result: TestResult) {
 		const testRun = this.testResults.find(({ testID }) => testID === test.id);
-		if(!testRun) throw new Error('Test not found in testResults');
+		if (!testRun) throw new Error('Test not found in testResults');
 		const testRunNumber = `[${testRun.testNumber}/${this.totalTests}]`;
 		const testName = this.parallelTests ? ` -- ${testRunNumber} ${test.title}` : '';
 		console.group();
@@ -209,35 +197,27 @@ class MyReporter implements Reporter {
 		};
 		console.log('\n\x1b[43m\x1b[30m%s\x1b[0m', '📊 TEST REPORT SUMMARY:', '\n');
 		console.group();
-		this.testResults.forEach((test) => {
+		this.testResults.forEach(test => {
 			const duration = test.testDuration;
-			if(!duration) throw new Error('Test Duration is not defined');
+			if (!duration) throw new Error('Test Duration is not defined');
 			const durationDecimal = (test.testDuration = duration / 1000);
-			if (test.testStatus === 'passed')
-				console.log('\x1b[32m%s\x1b[0m', test.testStatus, '✅', test.testNumber, '🧪', test.testName, durationDecimal, 's');
-			if (test.testStatus === 'failed')
-				console.log('\x1b[31m%s\x1b[0m', test.testStatus, '❌', test.testNumber, '🧪', test.testName, durationDecimal, 's');
-			if (test.testStatus === 'timedOut')
-				console.log('\x1b[31m%s\x1b[0m', test.testStatus, '⌛', test.testNumber, '🧪', test.testName, durationDecimal, 's');
-			if (test.testStatus === 'interrupted')
-				console.log('\x1b[31m%s\x1b[0m', test.testStatus, '⚠️', test.testNumber, '🧪', test.testName, durationDecimal, 's');
+			if (test.testStatus === 'passed') console.log('\x1b[32m%s\x1b[0m', test.testStatus, '✅', test.testNumber, '🧪', test.testName, durationDecimal, 's');
+			if (test.testStatus === 'failed') console.log('\x1b[31m%s\x1b[0m', test.testStatus, '❌', test.testNumber, '🧪', test.testName, durationDecimal, 's');
+			if (test.testStatus === 'timedOut') console.log('\x1b[31m%s\x1b[0m', test.testStatus, '⌛', test.testNumber, '🧪', test.testName, durationDecimal, 's');
+			if (test.testStatus === 'interrupted') console.log('\x1b[31m%s\x1b[0m', test.testStatus, '⚠️', test.testNumber, '🧪', test.testName, durationDecimal, 's');
 		});
 		console.groupEnd();
 		console.log('\n\x1b[1m\x1b[0m', '⏰ Test Execution Ended in', parseFloat(duration.toFixed(2)), 'seconds.');
 		const resultStatus = result.status;
 		const allTestOutput = results[resultStatus];
-		if (allTestOutput === allTestsPassed) 
-			console.log('\x1b[1m\x1b[37m%s\x1b[0m\x1b[30m\x1b[102m%s\x1b[0m', '🚀 Overall Output: ✅ ', allTestOutput);
-		
-		if (allTestOutput === executionFailed) 
-			console.log('\x1b[1m\x1b[37m%s\x1b[0m\x1b[1m\x1b[37m\x1b[41m%s\x1b[0m', '🚀 Overall Output: 🔴 ', allTestOutput);
-		
-		if (allTestOutput === timedOut) 
-			console.log('\x1b[1m\x1b[37m%s\x1b[0m\x1b[1m\x1b[37m\x1b[41m%s\x1b[0m', '🚀 Overall Output: ⏱️ ', allTestOutput);
-		
-		if (allTestOutput === interrupted) 
-			console.log('\x1b[1m\x1b[37m%s\x1b[0m\x1b[1m\x1b[37m\x1b[41m%s\x1b[0m', '🚀 Overall Output: ⚠️ ', allTestOutput);
-		
+		if (allTestOutput === allTestsPassed) console.log('\x1b[1m\x1b[37m%s\x1b[0m\x1b[30m\x1b[102m%s\x1b[0m', '🚀 Overall Output: ✅ ', allTestOutput);
+
+		if (allTestOutput === executionFailed) console.log('\x1b[1m\x1b[37m%s\x1b[0m\x1b[1m\x1b[37m\x1b[41m%s\x1b[0m', '🚀 Overall Output: 🔴 ', allTestOutput);
+
+		if (allTestOutput === timedOut) console.log('\x1b[1m\x1b[37m%s\x1b[0m\x1b[1m\x1b[37m\x1b[41m%s\x1b[0m', '🚀 Overall Output: ⏱️ ', allTestOutput);
+
+		if (allTestOutput === interrupted) console.log('\x1b[1m\x1b[37m%s\x1b[0m\x1b[1m\x1b[37m\x1b[41m%s\x1b[0m', '🚀 Overall Output: ⚠️ ', allTestOutput);
+
 		console.log('\x1b[0m');
 	}
 	// onExit(): Promise<void> {

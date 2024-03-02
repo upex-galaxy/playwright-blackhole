@@ -11,8 +11,6 @@ export class SpaceDestinationPage extends ReactPage {
 	dropdownplanetbtn: () => Locator;
 	selectLauchbtn: () => Locator;
 	selectplanetbtn: () => Locator;
-	dropdownpicker: () => Locator;
-	dropdownOptions: (option?: 'Launch' | undefined) => Locator;
 
 	constructor( driver:Page ) {
 		super(driver);
@@ -20,8 +18,6 @@ export class SpaceDestinationPage extends ReactPage {
 		this.selectDestinationbtn = () => this.getByReactTool('button' , { hasText: 'Select Destination' });
 		this.dropdownLaunch = () => this.getByReactTool('dropdown', { hasText: 'Launch' });
 		this.dropdownlaunchbtn = () => this.page.locator('[class*=theme__values]').nth(2);
-		this.dropdownOptions = (option?: 'Launch'| undefined) => this.page.locator('[class*=theme__values]', { hasText: option });
-		this.dropdownpicker = () => this.dropdownlaunchbtn('Launch').locator('ul');
 		this.selectLauchbtn = () => this.dropdownlaunchbtn().getByText('Tongli');
 		this.dropdownplanet = () => this.getByReactTool('dropdown' , { hasText: 'Planet color' } );
 		this.dropdownplanetbtn = () => this.page.locator('[class*=theme__values]').nth(3);
@@ -35,10 +31,11 @@ export class SpaceDestinationPage extends ReactPage {
 		await this.dropdownplanet().click();
 		await this.selectplanetbtn().click();
 	}
+
 	async selectradomdestination() {
-		const countLauch = await this.dropdownlaunchbtn().count();
+		const countLauch = await this.dropdownOptionsLP().count();
 		const mathLauch = Math.floor(Math.random() * countLauch);
-		return this.dropdownlaunchbtn().nth(mathLauch);
+		return this.dropdownOptionsLP().nth(mathLauch);
 	}
 
 }

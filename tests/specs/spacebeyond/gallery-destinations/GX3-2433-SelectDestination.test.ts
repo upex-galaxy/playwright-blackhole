@@ -10,4 +10,7 @@ story('GX3-2433 | Select Destination | ', () => {
 		await destinationSpace.selectDestination();
 		await filterPage.moveSliderTo(-80);
 	});
+	test('GX3-2433 | TC2: Select Radom Destination' , async ({ destinationSpace, filterPage }) => {
+		await destinationSpace.selectradomdestination();
+	});
 });

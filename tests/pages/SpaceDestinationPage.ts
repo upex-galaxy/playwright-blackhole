@@ -6,22 +6,26 @@ export class SpaceDestinationPage extends ReactPage {
 	page: Page;
 	selectDestinationbtn: () => Locator;
 	dropdownLaunch: () => Locator;
-	dropdownlaunchbtn: () => Locator;
 	dropdownplanet: () => Locator;
-	dropdownplanetbtn: () => Locator;
 	selectLauchbtn: () => Locator;
 	selectplanetbtn: () => Locator;
+	dropdownOptions: (option?: 'Launch' | 'Planet color' | undefined) => Locator;
+	launchPickerInput: () => Locator;
+	launchPickerUL: () => Locator;
+	launchx2: () => Locator;
 
 	constructor( driver:Page ) {
 		super(driver);
 		this.page = driver;
 		this.selectDestinationbtn = () => this.getByReactTool('button' , { hasText: 'Select Destination' });
 		this.dropdownLaunch = () => this.getByReactTool('dropdown', { hasText: 'Launch' });
-		this.dropdownlaunchbtn = () => this.page.locator('[class*=theme__values]').nth(2);
-		this.selectLauchbtn = () => this.dropdownlaunchbtn().getByText('Tongli');
+		this.selectLauchbtn = () => this.dropdownLaunch().getByText('Tongli');
 		this.dropdownplanet = () => this.getByReactTool('dropdown' , { hasText: 'Planet color' } );
-		this.dropdownplanetbtn = () => this.page.locator('[class*=theme__values]').nth(3);
-		this.selectplanetbtn = () => this.dropdownplanetbtn().getByText('Blue');
+		this.selectplanetbtn = () => this.dropdownplanet().getByText('Blue');
+		this.dropdownOptions = (option?: 'Launch' | 'Planet color' | undefined) => this.page.locator('[data-react-toolbox=dropdown]', { hasText: option });
+		this.launchPickerInput = () => this.dropdownOptions('Launch').locator('input');
+		this.launchPickerUL = () => this.dropdownOptions('Launch').locator('ul');
+		this.launchx2 = () => this.page.locator(".theme__selected___2Uc3r", { hasText: 'Launch' })
 	}
 
 	async selectDestination() {
@@ -31,11 +35,15 @@ export class SpaceDestinationPage extends ReactPage {
 		await this.dropdownplanet().click();
 		await this.selectplanetbtn().click();
 	}
-
-	async selectradomdestination() {
-		const countLauch = await this.dropdownOptionsLP().count();
-		const mathLauch = Math.floor(Math.random() * countLauch);
-		return this.dropdownOptionsLP().nth(mathLauch);
+	
+	async getLaunchByIndex(destinyIndex: number) {
+		return this.launchx2().nth(destinyIndex);
 	}
 
+	async selectradomdestination() {
+		const countLauch = await this.launchx2().count();
+		const mathLauch = Math.floor(Math.random() * countLauch);
+		return this.getLaunchByIndex(mathLauch);
+	}
+	
 }

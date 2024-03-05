@@ -10,16 +10,18 @@ export class SpaceLoginPageJhoa extends ReactPage {
 	usernameInput: () => Locator;
 	passwordInput: () => Locator;
 	loginButton: () => Locator;
+	loginclick: () => Locator;
 
 	constructor(driver: Page) {
 		super(driver);
-		this.usernameInput = () => this.getByReactTool('input', this.page, { hasText: 'Username' }).locator('[role=input]');
-		this.passwordInput = () => this.getByReactTool('input', this.page, { hasText: 'Password' }).locator('[role=input]');
+		this.usernameInput = () => this.getByReactTool('input', { hasText: 'Username' }).locator('[role=input]');
+		this.passwordInput = () => this.getByReactTool('input', { hasText: 'Password' }).locator('[role=input]');
 		this.loginButton = () => this.page.locator('[form="login"]');
+		this.loginclick = () => this.page.locator('[class*=NavButton]');
 	}
 
 	async loginSuccess() {
-		await this.page.goto('https://demo.testim.io/login');
+		await this.loginclick().click();
 		await this.usernameInput().fill(actualUsername);
 		await this.passwordInput().fill(actualPassword);
 		await this.	loginButton().click();

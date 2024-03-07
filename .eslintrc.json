@@ -16,11 +16,12 @@
 	"rules": {
 		"@typescript-eslint/consistent-type-imports": ["error"],
 		"@typescript-eslint/naming-convention": ["warn"],
+		"@typescript-eslint/no-unnecessary-condition": "warn",
 		"@typescript-eslint/no-floating-promises": ["error"],
 		"@typescript-eslint/no-unsafe-argument": ["warn"],
 		"@typescript-eslint/no-unsafe-assignment": ["warn"],
 		"arrow-spacing": ["warn", { "before": true, "after": true }],
-		"curly": ["error", "all"],
+		"curly": ["error", "multi"],
 		"indent": ["warn", "tab", { "SwitchCase": 1 }],
 		"linebreak-style": ["off"],
 		"no-multi-spaces": ["warn"],

@@ -12,7 +12,6 @@ export class SpaceDestinationPage extends ReactPage {
 	dropdownOptions: (option?: 'Launch' | 'Planet color' | undefined) => Locator;
 	launchPickerInput: () => Locator;
 	launchPickerUL: () => Locator;
-	launchx2: () => Locator;
 
 	constructor( driver:Page ) {
 		super(driver);
@@ -25,7 +24,6 @@ export class SpaceDestinationPage extends ReactPage {
 		this.dropdownOptions = (option?: 'Launch' | 'Planet color' | undefined) => this.page.locator('[data-react-toolbox=dropdown]', { hasText: option });
 		this.launchPickerInput = () => this.dropdownOptions('Launch').locator('input');
 		this.launchPickerUL = () => this.dropdownOptions('Launch').locator('ul');
-		this.launchx2 = () => this.page.locator(".theme__selected___2Uc3r", { hasText: 'Launch' })
 	}
 
 	async selectDestination() {
@@ -37,13 +35,13 @@ export class SpaceDestinationPage extends ReactPage {
 	}
 	
 	async getLaunchByIndex(destinyIndex: number) {
-		return this.launchx2().nth(destinyIndex);
+		return this.launchPickerUL().nth(destinyIndex);
 	}
 
 	async selectradomdestination() {
-		const countLauch = await this.launchx2().count();
-		const mathLauch = Math.floor(Math.random() * countLauch);
-		return this.getLaunchByIndex(mathLauch);
+		const availableLauch = await this.launchPickerInput().count();
+		const mathLauch = Math.floor(Math.random() * availableLauch);
+		return this.launchPickerInput().nth(mathLauch);
 	}
 	
 }

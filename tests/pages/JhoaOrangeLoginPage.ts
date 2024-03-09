@@ -2,14 +2,8 @@ import { type Page, type Locator, expect } from '@playwright/test';
 import * as env from 'dotenv';
 env.config(); 
 
-const myUserName = process.env.ORANGE_USERNAME;
-const myPassWord = process.env.ORANGE_PASSWORD;
-
-export class OrangeLogin {
+export class OrangeSearchUser {
 	page: Page;
-	usernameInput: Locator;
-	passwordInput: Locator;
-	loginbutton: Locator;
 	adminbtn: Locator;
 	typeUser: Locator;
 	userRoleBtn: Locator;
@@ -19,12 +13,13 @@ export class OrangeLogin {
 	statusBtn: Locator;
 	selectStatus: Locator;
 	submitBtn: Locator;
+	msgError: Locator;
+	borderError: Locator;
+	tableContain: Locator;
+	errorText: Locator;
 
 	constructor(driver: Page) {
 		this.page = driver; 
-		this.usernameInput = this.page.locator('[name="username"]');
-		this.passwordInput = this.page.locator('[name="password"]');
-		this.loginbutton = this.page.locator('[type="submit"]');
 		this.adminbtn = this.page.locator('a', { hasText: 'Admin' });
 		this.typeUser = this.page.locator('[class*="input--active"]').nth(1);
 		this.userRoleBtn = this.page.locator('[class*="text--active"]').nth(0);
@@ -34,17 +29,32 @@ export class OrangeLogin {
 		this.statusBtn = this.page.locator('[class*="text--active"]').nth(1);
 		this.selectStatus = this.page.locator('span', { hasText: 'Enabled' });
 		this.submitBtn = this.page.locator('button[type=submit]');
+		this.msgError = this.page.locator('div', { hasText: 'No Records Found' });
+		this.borderError = this.page.locator('[class*=\'input--error\']');
+		this.tableContain = this.page.locator('.oxd-table-card');
+		this.errorText = this.page.locator('[class*=group__message]');
 	}
-	
-	async loginSuccess() {
-		await this.page.goto('https://opensource-demo.orangehrmlive.com/');
-		await this.usernameInput.fill('myUserName');
-		await this.passwordInput.fill('myPassWord');
-		await this.loginbutton.click();
-		await expect(this.page.url()).toContain('dashboard');
-	}
+
 	async searchUser() {
 		await this.adminbtn.click();
-		await this.typeUser.click();
+		await this.typeUser.fill('Admin');
+		await this.userRoleBtn.click();
+		await this.selectUserRole.click();
+		await this.typeName.fill('Tester');
+		await this.page.waitForTimeout(2000);
+		await this.seletName.click();
+		await this.statusBtn.click();
+		await this.selectStatus.click();
+		await this.submitBtn.click();
+	}
+
+	async searchUserFail() {
+		await this.adminbtn.click();
+		await this.typeUser.fill('Admin');
+		await this.userRoleBtn.click();
+		await this.selectUserRole.click();
+		await this.typeName.fill('dfhd');
+		await this.page.waitForTimeout(2000);
+		await this.seletName.click();
 	}
 }

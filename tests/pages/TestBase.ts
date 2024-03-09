@@ -6,6 +6,7 @@ import { TrelloBoards } from '@api/elyTrelloBoards';
 import { OrangeLoginPage } from './OrangeLoginPage';
 import { SpaceSearchPage } from './SpaceSearchPage';
 import { SpaceFilterPage } from './SpaceFilterPage';
+import { OrangeSearchUser } from './JhoaOrangeLoginPage';
 
 const test = driver.extend<{
 	loginPage: SpaceLoginPage;
@@ -15,6 +16,7 @@ const test = driver.extend<{
 	orangeLoginPage: OrangeLoginPage;
 	searchPage: SpaceSearchPage;
 	filterPage: SpaceFilterPage;
+	orangeSearchUserPage: OrangeSearchUser;
 }>({
 	loginPage: async ({ page }, use) => await use(new SpaceLoginPage(page)),
 	searchPage: async ({ page }, use) => await use(new SpaceSearchPage(page)),
@@ -23,6 +25,7 @@ const test = driver.extend<{
 	productPage: async ({ page }, use) => await use(new SpaceProductPage(page)),
 	checkoutPage: async ({ page }, use) => await use(new SpaceCheckoutPage(page)),
 	apiBoards: async ({ page }, use) => await use(new TrelloBoards(page)),
+	orangeSearchUserPage: async ({ page }, use) => await use(new OrangeSearchUser(page)),
 });
 
 export { test };

@@ -17,6 +17,7 @@ export class OrangeSearchUser {
 	borderError: Locator;
 	tableContain: Locator;
 	errorText: Locator;
+	outputContainer: Locator;
 
 	constructor(driver: Page) {
 		this.page = driver; 
@@ -33,6 +34,8 @@ export class OrangeSearchUser {
 		this.borderError = this.page.locator('[class*=\'input--error\']');
 		this.tableContain = this.page.locator('.oxd-table-card');
 		this.errorText = this.page.locator('[class*=group__message]');
+		this.outputContainer = this.page.locator('.orangehrm-container');
+
 	}
 
 	async searchUser() {
@@ -40,7 +43,7 @@ export class OrangeSearchUser {
 		await this.typeUser.fill('Admin');
 		await this.userRoleBtn.click();
 		await this.selectUserRole.click();
-		await this.typeName.fill('Tester');
+		await this.typeName.fill('Bob Tester');
 		await this.page.waitForTimeout(2000);
 		await this.seletName.click();
 		await this.statusBtn.click();
@@ -50,11 +53,32 @@ export class OrangeSearchUser {
 
 	async searchUserFail() {
 		await this.adminbtn.click();
-		await this.typeUser.fill('Admin');
-		await this.userRoleBtn.click();
-		await this.selectUserRole.click();
 		await this.typeName.fill('dfhd');
 		await this.page.waitForTimeout(2000);
 		await this.seletName.click();
+	}
+	async searchUserbyUsername() {
+		await this.adminbtn.click();
+		await this.typeUser.fill('Admin');
+		await this.submitBtn.click();
+	}
+	async searchUserbyUserRole() {
+		await this.adminbtn.click();
+		await this.userRoleBtn.click();
+		await this.selectUserRole.click();
+		await this.submitBtn.click();
+	}
+	async searchUserbyName() {
+		await this.adminbtn.click();
+		await this.statusBtn.click();
+		await this.typeName.fill('Tester');
+		await this.page.waitForTimeout(2000);
+		await this.submitBtn.click();
+	}
+	async searchUserbyStatus() {
+		await this.adminbtn.click();
+		await this.statusBtn.click();
+		await this.selectStatus.click();
+		await this.submitBtn.click();
 	}
 }

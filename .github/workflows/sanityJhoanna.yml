@@ -41,9 +41,6 @@ jobs:
     - name: ✅ 🧪Test Suite Execution
       run: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
         bun run test:ci tests/specs/orange-hrm/searchUserJhoa.test.ts
-      env:
-        CI_ORANGEHRM_USERNAME: ${{secrets.CI_ORANGEHRM_USERNAME}}
-        CI_ORANGEHRM_PASSWORD: ${{secrets.CI_ORANGEHRM_PASSWORD}}
 
     - name: 📊Generate Allure Report
       run: |

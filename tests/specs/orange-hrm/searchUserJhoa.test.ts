@@ -1,8 +1,8 @@
 import { story, test, expect, precondition } from '@TestBase';
 
 story('GX3-2362 | OrangeHRM | Admin | Search User' , async () => {
-	precondition('Login User' , async ({ orangeLoginPage }) => {
-		await orangeLoginPage.loginSuccess();
+	precondition('Login User' , async ({ orangeLPJhoa }) => {
+		await orangeLPJhoa.loginSuccess();
 	});
 	test('TC1: Search employee by Username' , async ({ orangeSearchUserPage }) => {
 		await orangeSearchUserPage.searchUserbyUsername();

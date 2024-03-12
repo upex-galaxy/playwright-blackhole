@@ -2,8 +2,8 @@ import { type Page, type Locator, expect } from '@playwright/test';
 import * as env from 'dotenv';
 env.config();
 
-const actualUsername = process.env.ORANGE_USERNAME;
-const actualPassword = process.env.ORANGE_PASSWORD;
+const actualUsername = process.env.CI_ORANGE_USERNAME;
+const actualPassword = process.env.CI_ORANGE_PASSWORD;
 
 export class OrangeLoginPage {
 	page: Page;

@@ -71,7 +71,7 @@ export class OrangeSearchUser {
 	async searchUserbyName() {
 		await this.adminbtn.click();
 		await this.statusBtn.click();
-		await this.typeName.fill('Tester');
+		await this.typeName.fill('Bob Tester');
 		await this.page.waitForTimeout(2000);
 		await this.submitBtn.click();
 	}

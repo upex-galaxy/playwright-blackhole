@@ -3,7 +3,7 @@ import { story, test, expect, precondition } from '@TestBase';
 story('GX3-2362 | OrangeHRM | Admin | Search User' , async () => {
 	precondition('Login User' , async ({ orangeLPJhoa }) => {
 		await orangeLPJhoa.loginSuccess();
-		test.setTimeout(2 * 100 * 1000);
+		test.setTimeout(2 * 60 * 1000);
 	});
 	test('TC1: Search employee by Username' , async ({ orangeSearchUserPage }) => {
 		await orangeSearchUserPage.searchUserbyUsername();

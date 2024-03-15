@@ -80,6 +80,7 @@ export class OrangeSearchUser {
 			await this.selectStatus(arg.status).click();
 		}
 		await this.submitBtn.click();
+		await this.page.waitForTimeout(2000);
 	}
 
 	async searchUserbyUserRole() {

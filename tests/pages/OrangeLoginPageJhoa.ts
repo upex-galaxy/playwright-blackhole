@@ -2,10 +2,7 @@ import { type Page, type Locator, expect } from '@playwright/test';
 import * as env from 'dotenv';
 env.config();
 
-const actualUsername = process.env.CI_ORANGE_USERNAME;
-const actualPassword = process.env.CI_ORANGE_PASSWORD;
-
-export class OrangeLoginPage {
+export class OrangeLPJhoa {
 	page: Page;
 	usernameInput: () => Locator;
 	passwordInput: () => Locator;
@@ -21,8 +18,8 @@ export class OrangeLoginPage {
 	async loginSuccess() {
 		await this.page.goto('https://opensource-demo.orangehrmlive.com/');
 		expect.soft(this.page.url()).toContain('auth/login');
-		await this.usernameInput().fill(actualUsername);
-		await this.passwordInput().fill(actualPassword);
+		await this.usernameInput().fill('Admin');
+		await this.passwordInput().fill('admin123');
 		await this.loginSubmitButton().click();
 		expect.soft(this.page.url()).toContain('dashboard/index');
 	}

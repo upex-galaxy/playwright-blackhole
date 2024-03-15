@@ -16,7 +16,7 @@ on:
 
 jobs:
   TestSuite:
-    timeout-minutes: 60
+    timeout-minutes: 80
     runs-on: ubuntu-latest
     steps:
     - name: 📘 Checkout Repo

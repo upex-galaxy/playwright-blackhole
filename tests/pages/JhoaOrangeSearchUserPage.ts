@@ -80,7 +80,7 @@ export class OrangeSearchUser {
 			await this.selectStatus(arg.status).click();
 		}
 		await this.submitBtn.click();
-		await this.page.waitForTimeout(2000);
+		await this.page.waitForTimeout(2000); // make sure the table is loaded after searching
 	}
 
 	async searchUserbyUserRole() {
@@ -111,6 +111,7 @@ export class OrangeSearchUser {
 	}
 
 	async getRandomUserFromTable() {
+		await this.page.waitForTimeout(2000); // make sure the table is loaded
 		const allUsernames = await this.getAllUsernamesInTable();
 		const givenIndex = Math.floor(Math.random() * allUsernames.length);
 		const givenUsername = allUsernames[givenIndex];

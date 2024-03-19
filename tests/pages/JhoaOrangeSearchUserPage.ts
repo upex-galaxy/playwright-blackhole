@@ -74,7 +74,7 @@ export class OrangeSearchUser {
 			await this.userRoleBtn.click();
 			await this.selectUserRole.click(); 
 		}
-		arg?.employeeName && await this.employeeNameInput.fill(arg.employeeName);
+		arg?.employeeName && await this.employeeNameInput.fill(arg.employeeName).then(() => this.page.waitForTimeout(3000)).then(() => this.seletName.click());
 		if (arg?.status) {
 			await this.statusBtn.click();
 			await this.selectStatus(arg.status).click();
@@ -117,4 +117,24 @@ export class OrangeSearchUser {
 		const givenUsername = allUsernames[givenIndex];
 		return givenUsername;
 	}
+	async getAllEmplyeednameInTable() {
+		const allRows = await this.tableRows.all();
+		const allCells = allRows.map(row => row.getByRole('cell').nth(3));
+		const allEmplyeed = await Promise.all(allCells.map(cell => cell.innerText()));
+		return allEmplyeed;
+	}
+	async getRandomEmployeeNameFromTable() {
+		await this.page.waitForTimeout(2000); // make sure the table is loaded
+		const allEmplyeed = await this.getAllEmplyeednameInTable();
+		const givenIndex = Math.floor(Math.random() * allEmplyeed.length);
+		const givenEmployeeName = allEmplyeed[givenIndex];
+		return givenEmployeeName;
+	}
+	async getAllStatusInTable() {
+		const allRows = await this.tableRows.all();
+		const allCells = allRows.map(row => row.getByRole('cell').nth(4));
+		const allStatus = await Promise.all(allCells.map(cell => cell.innerText()));
+		return allStatus;
+	}
+
 }

@@ -1,6 +1,7 @@
 import { type Locator, type Page, } from '@playwright/test';
-import * as dotenv from 'dotenv';
 import { ReactPage } from './ReactPage';
+import * as env from 'dotenv';
+env.config(); 
 
 export class SpaceDestinationPage extends ReactPage {
 	page: Page;
@@ -12,7 +13,8 @@ export class SpaceDestinationPage extends ReactPage {
 	dropdownOptions: (option?: 'Launch' | 'Planet color' | undefined) => Locator;
 	launchPickerInput: () => Locator;
 	launchPickerUL: () => Locator;
-	destinyLaunch: (destinyTitle: string) => Locator;
+	planetPickerInput: () => Locator;
+	planetPickerUL: () => Locator;
 
 	constructor( driver:Page ) {
 		super(driver);
@@ -20,12 +22,13 @@ export class SpaceDestinationPage extends ReactPage {
 		this.selectDestinationbtn = () => this.getByReactTool('button' , { hasText: 'Select Destination' });
 		this.dropdownLaunch = () => this.getByReactTool('dropdown', { hasText: 'Launch' });
 		this.selectLauchbtn = () => this.page.locator('[class*="31xyK Gallery__dropdo"]');
-		this.destinyLaunch = (destinyTitle: string) => this.page.locator('[class*="31xyK Gallery__dropdo"]', { hasText: destinyTitle });
 		this.dropdownplanet = () => this.getByReactTool('dropdown' , { hasText: 'Planet color' } );
 		this.selectplanetbtn = () => this.dropdownplanet().getByText('Blue');
 		this.dropdownOptions = (option?: 'Launch' | 'Planet color' | undefined) => this.page.locator('[data-react-toolbox=dropdown]', { hasText: option });
 		this.launchPickerInput = () => this.dropdownOptions('Launch').locator('input');
 		this.launchPickerUL = () => this.dropdownOptions('Launch').locator('ul');
+		this.planetPickerInput = () => this .dropdownOptions('Planet color').locator('input');
+		this.planetPickerUL = () => this.dropdownOptions('Planet color').locator('ul');
 	}
 
 	async selectDestination() {
@@ -36,14 +39,15 @@ export class SpaceDestinationPage extends ReactPage {
 		await this.selectplanetbtn().click();
 	}
 	
-	async getLaunchByIndex(destinyIndex: number) {
-		return this.selectLauchbtn().nth(destinyIndex);
+	async getLaunchByIndex() {
+		const launch = await this.launchPickerUL().locator('li');
+		const launchOptions = await launch.all();
+		return launchOptions;
 	}
-
-	async selectradomdestination() {
-		const availableLauch = (await this.selectLauchbtn().innerText()).length;
-		const mathLauch = Math.floor(Math.random() * availableLauch);
-		return this.getLaunchByIndex(mathLauch);
+	async getRadomLaunch() {
+		const launchOptions = await this.getLaunchByIndex();
+		const index = Math.floor(Math.random() * launchOptions.length);
+		return launchOptions[index];
 	}
 	
 }

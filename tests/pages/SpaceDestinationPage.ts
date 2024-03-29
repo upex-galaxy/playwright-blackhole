@@ -42,12 +42,15 @@ export class SpaceDestinationPage extends ReactPage {
 	async getLaunchByIndex() {
 		const launch = await this.launchPickerUL().locator('li');
 		const launchOptions = await launch.all();
-		return launchOptions;
+		const alloptions = await Promise.all(launchOptions.map(async (item) => item.textContent()));
+		return alloptions;
 	}
 	async getRadomLaunch() {
 		const launchOptions = await this.getLaunchByIndex();
+		await this.dropdownLaunch().click();
 		const index = Math.floor(Math.random() * launchOptions.length);
-		return launchOptions[index];
+		const getOptions = launchOptions[index];
+		await getOptions.click();
 	}
 	
 }

@@ -6,35 +6,25 @@ env.config();
 export class SpaceDestinationPage extends ReactPage {
 	page: Page;
 	selectDestinationbtn: () => Locator;
-	dropdownLaunch: () => Locator;
-	dropdownplanet: () => Locator;
-	selectLauchbtn: () => Locator;
-	selectplanetbtn: () => Locator;
 	dropdown: (name: 'Launch' | 'Planet color') => Locator;
 	dropdownInput: (name: 'Launch' | 'Planet color') => Locator;
-	launchPickerInput: () => Locator;
-	launchPickerUL: () => Locator;
-	planetPickerInput: () => Locator;
-	planetPickerUL: () => Locator;
 	dropdownOptions: (name: 'Launch' | 'Planet color') => Locator;
+	demoDropdown: (name: 'Select Option' | 'Select Title'| 'Select...') => Locator;
+	demoDropdownOptions: (name: 'Select Option' | 'Select Title'| 'Select...') => Locator;
+	demoDropDownOldMenu: () => Locator;
+	demoOldMenuOptions: () => Locator;
 
 	constructor( driver:Page ) {
 		super(driver);
 		this.page = driver;
 		this.selectDestinationbtn = () => this.getByReactTool('button' , { hasText: 'Select Destination' });
-		this.dropdownLaunch = () => this.getByReactTool('dropdown', { hasText: 'Launch' });
-		this.selectLauchbtn = () => this.page.locator('[class*="31xyK Gallery__dropdo"]');
-		this.dropdownplanet = () => this.getByReactTool('dropdown' , { hasText: 'Planet color' } );
-		this.selectplanetbtn = () => this.dropdownplanet().getByText('Blue');
-
 		this.dropdown = (name: 'Launch' | 'Planet color') => this.getByReactTool('dropdown', { hasText: name });
 		this.dropdownInput = (name: 'Launch' | 'Planet color') => this.dropdown(name).locator('input');
 		this.dropdownOptions = (name: 'Launch' | 'Planet color') => this.dropdown(name).locator('ul li'); //? Es la estructura de los dropdowns
-
-		this.launchPickerInput = () => this.dropdown('Launch').locator('input');
-		this.launchPickerUL = () => this.dropdown('Launch').locator('ul');
-		this.planetPickerInput = () => this .dropdown('Planet color').locator('input');
-		this.planetPickerUL = () => this.dropdown('Planet color').locator('ul');
+		this.demoDropdown= (name: 'Select Option' | 'Select Title' | 'Select...') => this.page.locator('.css-2b097c-container' , { hasText:name });
+		this.demoDropdownOptions= (name: 'Select Option' | 'Select Title'| 'Select...') => this.demoDropdown(name).locator('.css-26l3qy-menu');
+		this.demoDropDownOldMenu = () => this.page.locator('#oldSelectMenu');
+		this.demoOldMenuOptions = () => this.demoDropDownOldMenu().locator('select option')
 	}
 
 	async openAndGetDropdownOptions(dropdown: 'Launch' | 'Planet color') {
@@ -66,26 +56,48 @@ export class SpaceDestinationPage extends ReactPage {
 		return optionValue;
 	}
 
-	async selectDestination() {
-		await this.selectDestinationbtn().click();
-		await this.dropdownLaunch().click();
-		await this.selectLauchbtn().click();
-		await this.dropdownplanet().click();
-		await this.selectplanetbtn().click();
+	async demoQAOpenDropdown(dropdown: 'Select Option' | 'Select Title'| 'Select...') {
+		await this.demoDropdown(dropdown).click();
+		await this.page.waitForTimeout(500);
+		const options = this.demoDropdownOptions(dropdown);
+		return options;
 	}
-	
-	async getLaunchByIndex() {
-		const launch = await this.launchPickerUL().locator('li');
-		const launchOptions = await launch.all();
-		const alloptions = await Promise.all(launchOptions.map(async (item) => item.textContent()));
-		return alloptions;
+
+	async demoQASelectDropdown(dropdown: 'Select Option' | 'Select Title' | 'Select...', optionName: string) {
+		const demoLocator = await this.demoQAOpenDropdown(dropdown);
+		const givenOption = await demoLocator.getByText(optionName);
+		const optionNameValue = await givenOption.innerText();
+		await givenOption.click();
+		await this.page.waitForTimeout(500);
+		return optionNameValue;
+		
 	}
-	async getRadomLaunch() {
-		const launchOptions = await this.getLaunchByIndex();
-		await this.dropdownLaunch().click();
-		const index = Math.floor(Math.random() * launchOptions.length);
-		const getOptions = launchOptions[index];
-		await getOptions.click();
+
+	async demoQASelectRadomOption1(dropdown: 'Select Option' | 'Select Title' | 'Select...',) {
+		const locatorDemo1 = await this.demoQAOpenDropdown(dropdown);
+		const optionDemo1 = await locatorDemo1.all();
+		const randomDemo1 = await Math.floor(Math.random() * optionDemo1.length);
+		const givenOptionDemo1 = await optionDemo1[randomDemo1];
+		const givenValueDemo1 = await givenOptionDemo1.allInnerTexts();
+		await givenOptionDemo1.click();
+		await this.page.waitForTimeout(500);
+		return givenValueDemo1;
 	}
-	
+	async demoQAOpenOldMenu() {
+		await this.demoDropDownOldMenu().click();
+		await this.page.waitForTimeout(500);
+		const oldMenu = await this.demoOldMenuOptions();
+		return oldMenu;
+	}
+	async demoQASelectRadomOption2() {
+		const locatorDemo2 = await this.demoQAOpenOldMenu();
+		const optionDemo2 = await locatorDemo2.all();
+		const radomDemo2 = await Math.floor(Math.random() * optionDemo2.length);
+		const givenOptionDemo2 = optionDemo2[radomDemo2];
+		const givenValueDemo2 = givenOptionDemo2.allInnerTexts();
+		await givenOptionDemo2.click();
+		await this.page.waitForTimeout(500);
+		return givenValueDemo2;
+
+	}
 }

@@ -31,6 +31,7 @@ import { expect } from '@playwright/test';
 			await clickBtn.click();
 			var dynamicClickMessage=page.locator('#dynamicClickMessage')
 			expect(dynamicClickMessage).toHaveText('You have done a dynamic click')
+			
 		})
 
 })

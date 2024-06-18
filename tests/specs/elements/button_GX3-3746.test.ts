@@ -9,20 +9,42 @@ story ('GX3-3746: Element Buttons', () => {
 	});
 	
 	test ('TC1: should trigger when using Double click', async ({ page }) => {
-		await page.locator('#doubleClickBtn').dblclick();
-		const resultado= page.locator('#doubleClickMessage');
-		await expect (resultado).toHaveText('You have done a double click');
-
+		// *Given (precondicion)
+		
+		const expectMessage= await test.step ('Perform Click on Double Click Button', async () => {
+			const expectMessage ='You have done a double click';
+			await page.locator('#doubleClickBtn').dblclick();
+			return expectMessage;
+		});
+		await test.step ('Verify the message', async () => {
+		// *Then (asercion)
+			const messageElement= page.locator('#doubleClickMessage');
+			await expect (messageElement).toHaveText(expectMessage);
+		});
 	});
 	test ('TC2: should trigger when using  Right Click', async ({ page }) => {
-		await page.locator('#rightClickBtn').click({ button:'right' });
-		const resultado= page.locator('#rightClickMessage');
-		await expect(resultado).toHaveText('You have done a right click');
+		const expectMessage= await test.step ('Perform Click on Right Click', async () => {
+			const expectMessage ='You have done a right click';
+			await page.locator('#rightClickBtn').click({ button:'right' });
+			return expectMessage;
+		});
+		await test.step ('Verify the message', async () => {
+		// *Then (asercion)
+			const messageElement= page.locator('#rightClickMessage');
+			await expect (messageElement).toHaveText(expectMessage);
+		});
 	});
 	test ('TC3: should trigger when using  ClickMessage', async ({ page }) => {
-		await page.locator('#rightClickBtn').click();
-		const resultado= page.locator('#dynamicClickMessage');
-		await expect(resultado).toHaveText('You have done a dynamic click');
+		const expectMessage= await test.step ('Perform Click on ClickMessage', async () => {
+			const expectMessage ='You have done a dynamic click';
+			await page.getByText('Click Me',{ exact:true }).click({ button:'left' }); // trabaja con el texto y busca exactitud
+			return expectMessage;
+		});
+		await test.step ('Verify the message', async () => {
+		// *Then (asercion)
+			const messageElement= page.locator('#dynamicClickMessage');
+			await expect (messageElement).toHaveText(expectMessage);
+		});
 
 	});
 });

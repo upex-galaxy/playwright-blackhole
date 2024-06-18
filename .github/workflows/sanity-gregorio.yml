@@ -1,3 +1,13 @@
+#*🤖Este Pipeline de CI se activa al PUSHEAR o MERGEAR en ramas de tareas que no sean QA ni Main, y consiste en ejecutar los tests de una US e importar los resultados a Jira!🚀
+#*👩🏻‍🔬Para utilizar este Pipeline de Ari, sigue los siguientes pasos:
+#todo: 1 -> Crea tu propio archivo sanity.yml con tu username de GitHub, ejemplo sanity-saiotest.yml
+#todo: 2 -> Copia el contenido de este archivo yml y pégalo en tu nuevo archivo yml con tu username.
+#todo: 3 -> Modifica el trigger del Push en donde dice "TuBranchAqui", coloca tu nombre tal cual de tu rama git.
+#todo: 4 -> Modifica el archivo de prueba a ejectuar en el script del "yarn test" (ver ejemplo en este archivo)
+#todo: 5 -> Modifica la propiedad: "testExecKey" con tu ID del TX de Jira para importar automáticamente el resultado.
+#todo: 6 -> Recuerda modificar el projectKey correspondiente, si estás en L3, debe ser GX3 y así...
+#todo: 7 -> Listo! Guarda los cambios (git add + git commit) y pushea (git push) para ejectutar este Pipeline!
+#*Resultado: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí.
 name: 🧪Playwright Sanity Testing
 run-name: ${{github.actor}}👨🏻‍🔬 ran TestSuite in ${{github.ref_name}}
 on:
@@ -8,7 +18,6 @@ jobs:
   TestSuite:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-
     steps:
     - name: 📘 Checkout Repo
       uses: actions/checkout@v3
@@ -33,14 +42,9 @@ jobs:
 
     - name: ✅ 🧪Test Suite Execution
       run: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-        yarn test tests/specs/elements/Checkbox_GX-3770.test.ts
-      env:
-        TRELLO_ENV_CI_BASEURL: ${{secrets.TRELLO_ENV_CI_BASEURL}}
-        TRELLO_API_CI_KEY: ${{secrets.TRELLO_API_CI_KEY}}
-        TRELLO_API_CI_TOKEN: ${{secrets.TRELLO_API_CI_TOKEN}}
+        yarn test:ci tests/specs/elements/checkBox_GX3-3770.test.ts
 
     - name: 📊Generate Allure Report
-
       run: |
         yarn allure:open
 

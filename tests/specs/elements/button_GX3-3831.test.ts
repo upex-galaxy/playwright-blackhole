@@ -9,7 +9,7 @@ story('GX3-116: Elements_buttons', () => {
 	});
 
 	// Test Case 1
-	test('TC1: Debería validar mensaje al hacer doble clic en el boton', async ({ page }) => {
+	test('3832 | TC1: Debería validar mensaje al hacer doble clic en el botón.', async ({ page }) => {
 	// Declaro las variables
 		const doubleClickButton = page.getByRole('button', { name: 'Double Click Me' });
 		const ouputMessageDoubleClick = page.getByText('You have done a double click');
@@ -22,7 +22,7 @@ story('GX3-116: Elements_buttons', () => {
 	});
   
 	// Test Case 2
-	test('TC2: Debería validar al hacer clic derecho en el boton', async ({ page }) => {
+	test('3832 | TC2: Debería validar mensaje al hacer clic derecho en el botón.', async ({ page }) => {
 		// Declaro las variables 
 		const rightClickButton = page.locator('#rightClickBtn');
 		const outputMessageRightClick = page.locator('#rightClickMessage');
@@ -36,7 +36,7 @@ story('GX3-116: Elements_buttons', () => {
 	});
 
 	// Test Case 3
-	test('TC3: Debería mensaje al hacer clic en el boton', async ({ page }) => {
+	test('3832 | TC3: Debería validar mensaje al hacer clic en el botón.', async ({ page }) => {
 		// Declaro las variables
 		const clickMeButton = page.getByRole('button', { name: 'Click Me', exact: true });   
 		const outputMessageClick = page.getByText('You have done a dynamic click');

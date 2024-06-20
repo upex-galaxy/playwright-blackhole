@@ -12,7 +12,7 @@ name: 🧪Playwright Sanity Testing
 run-name: ${{github.actor}}👨🏻‍🔬 ran TestSuite in ${{github.ref_name}}
 on:
   push:
-    branches: ['GX3-3770-elements-checkbox'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+    branches: ['GX3-3823-tools-qa-elements-buttons'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
 
 jobs:
   TestSuite:
@@ -42,7 +42,7 @@ jobs:
 
     - name: ✅ 🧪Test Suite Execution
       run: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-        yarn test:ci tests/specs/elements/checkBox_GX3-3770.test.ts
+        yarn test:ci tests/specs/elements/button_GX3-3823.test.ts
 
     - name: 📊Generate Allure Report
       run: |
@@ -64,7 +64,7 @@ jobs:
         password: ${{secrets.XRAY_CLIENT_SECRET}}
         testFormat: 'junit'
         testPaths: 'test-junit-report/main-importer-report.xml'
-        testExecKey: 'GX3-3777' #!Cambiar a tu TX correspondiente.
+        testExecKey: 'GX3-3880' #!Cambiar a tu TX correspondiente.
         projectKey: 'GX3' #!Cambiar a tu Proyecto Level correspondiente.
 
     - name: 🔔Slack Notification of Done

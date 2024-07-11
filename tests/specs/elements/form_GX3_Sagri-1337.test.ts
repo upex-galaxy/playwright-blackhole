@@ -36,7 +36,8 @@ story('GX3_Sagri-1337: ToolsQA | Elements | Text Box: Fill form and Submit', () 
 
 		await test.step('Verificar el output', async () => {
 			const outputName = await page.locator('#output #name').innerText();
-			//expect(outputName).toEqual(data[0].fullName);
+			const cleanOuputName = outputName.replace('Name:', '').trim();
+			expect(cleanOuputName).toEqual(data[0].fullName);
 		});	
 	});
 

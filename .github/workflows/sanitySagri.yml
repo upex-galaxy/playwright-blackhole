@@ -30,7 +30,7 @@ jobs:
 
     - name: ✅ 🧪Test Suite Execution
       run: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:tests\specs\elements\form_GX3_Sagri-1337.test.ts
-        bun run test tests\specs\elements\form_GX3_Sagri-1337.test.ts
+        bun run test tests/specs/elements/form_GX3_Sagri-1337.test.ts
 
     - name: 📊Generate Allure Report
       run: |

@@ -1,13 +1,14 @@
 import { expect, precondition, story, test } from '@TestBase';
 import data from '@data/sagriUserDetails.json' assert { type: 'json' };
+import { getRealValues } from '@helper/SagriUtils';
 import type { SimpleForm } from '@type/inputTypes';
 
-story('GX3_Sagri-1337: ToolsQA | Elements | Text Box: Fill form and Submit', () => {
+story('GX3-Sagri: ToolsQA | Elements | Text Box: Rellenar formulario y enviar', () => {
 	precondition(async ({ page }) => {
 		await page.goto('/text-box', { waitUntil: 'domcontentloaded' });
 	});	
 
-	test('TC1: Se debería llenar el formulario y enviarlo', async ({ page }) => {
+	test('GX3-4057 | TC1: Se debería llenar el formulario y enviarlo', async ({ page }) => {
 
 		const usernameInput = page.locator('#userName-wrapper input');
 		const emailInput = page.locator('#userEmail-wrapper input');
@@ -16,32 +17,46 @@ story('GX3_Sagri-1337: ToolsQA | Elements | Text Box: Fill form and Submit', () 
 
 		console.log(data);
 
-		await test.step('Rellenar nombre de usuario', async () => {
-			await usernameInput.fill(data[0].fullName);
+		const expectedName = await test.step('Rellenar nombre de usuario', async () => {
+			const name = data[0].fullName;
+			await usernameInput.fill(name);
+			return name;
+
+		}); 
+		const expectedEmail = await test.step('Rellenar email', async () => {
+			const email = data[0].email;
+			await emailInput.fill(email);
+			return email;
 		});
-		await test.step('Rellenar email', async () => {
-			await emailInput.fill(data[0].email);
+
+		const expectedCuAddress = await test.step('Rellenar dirección actual', async () => {
+			const address = data[0].currentAddress;
+			await currentAddressInput.fill(address);
+			return address;
 		});
-		await test.step('Rellenar dirección actual', async () => {
-			await currentAddressInput.fill(data[0].currentAddress);
-		});
-		await test.step('Rellenar dirección permanente', async () => {
-			await paramentAddressInput.fill(data[0].permanentAddress);
+
+		const expectedPerAddress = await test.step('Rellenar dirección permanente', async () => {
+			const address = data[0].permanentAddress;
+			await paramentAddressInput.fill(address);
+			return address;
 		});
 
 		await test.step('Enviar el formulario', async () => {
 			await page.locator('button', { hasText: 'Submit' }).click();
 			await expect(page.locator('#output')).toBeVisible();
-		});
+		});	
 
-		await test.step('Verificar el output', async () => {
-			const outputName = await page.locator('#output #name').innerText();
-			const cleanOuputName = outputName.replace('Name:', '').trim();
-			expect(cleanOuputName).toEqual(data[0].fullName);
+		await test.step('Verificar el Output', async () => {
+			const outputTexts = page.locator('#output p');
+
+			const displayedValues = await getRealValues(outputTexts);
+			const expectedValues = [expectedName, expectedEmail, expectedCuAddress, expectedPerAddress];
+			expect(displayedValues).toEqual(expectedValues);
+			console.log('displayedValues: ', displayedValues);
 		});	
 	});
 
-	test('TC2: Se debería rellenar el formulario con diferentes datos', async ({ page }) => {
+	test('GX3-4057 | TC2: Se debería rellenar el formulario con diferentes datos', async ({ page }) => {
 
 		const usernameInput = page.locator('#userName-wrapper input');
 		const emailInput = page.locator('#userEmail-wrapper input');

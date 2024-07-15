@@ -1,8 +1,8 @@
-name: 🧪Pipeline Sagri SanityTest Execution
+name: 🧪Playwright Sagri's SanityTest Testing
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 on:
   push:
-    branches: ['test/GX3-1337_Sagri/fillform-submit'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+    branches: ['GX3-4199_Sagri-Elements/Upload'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
 
 jobs:
   TestSuite:
@@ -30,7 +30,7 @@ jobs:
 
     - name: ✅ 🧪Test Suite Execution
       run: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:tests\specs\elements\form_GX3_Sagri-1337.test.ts
-        bun run test tests/specs/elements/form_GX3_Sagri-1337.test.ts
+        bun run test tests/specs/elements/uploadDownload_GX3_Sagri-4199.test.ts
 
     - name: 📊Generate Allure Report
       run: |
@@ -44,7 +44,7 @@ jobs:
         password: ${{ env.XRAY_SECRET }}
         testFormat: 'junit'
         testPaths: 'test-junit-report/main-importer-report.xml'
-        testExecKey: 'GX3-4064' #!Cambiar a tu TX correspondiente.
+        testExecKey: 'GX3-4206' #!Cambiar a tu TX correspondiente.
         projectKey: 'GX3' #!Cambiar a tu Proyecto Level correspondiente.
       env:
         XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_ID }}

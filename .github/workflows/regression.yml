@@ -2,7 +2,7 @@
 #? 🤖Este Pipeline de CI se activa al hacer MERGE a la rama "QA" o "MAIN",
 #? 🧪Consiste en ejecutar TODOS los tests del Repo e importar los resultados a Jira!🚀
 #! 👩🏻‍🔬Este Pipeline de CI NO DEBE EDITARSE sin permiso del QA Lead.
-name: 🧪Playwright Regression Testing
+name: 🧪Pipeline Regression in QA
 run-name: ${{github.actor}}👨🏻‍🔬 triggered Regression in ${{github.ref_name}}
 
 on:
@@ -15,7 +15,6 @@ jobs:
     name: regression
     timeout-minutes: 60
     runs-on: ubuntu-latest
-
     strategy:
       fail-fast: false
       matrix:
@@ -29,24 +28,22 @@ jobs:
     - name: 💿 Installing Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: 18
+        node-version: 20
 
-    - name: 💿Yarn Setup
-      uses: DerYeger/yarn-setup-action@master
-      with:
-        node-version: 18
+    - name: 🍙 Bun Setup
+      uses: oven-sh/setup-bun@v1
 
     - name: 🧬 Install Project Dependencies
       run: |
-        yarn
+        bun install
 
     - name: 🎭️ Installing Playwright And Browsers
       run: |
-        yarn pw:install
+        bun run pw:install
 
     - name: 🎭️ Playwright Regression Test on ${{ matrix.browser }}
       run: |
-        yarn regression:${{ matrix.browser }}
+        bun run regression:${{ matrix.browser }}
       env:
         TRELLO_ENV_CI_BASEURL: ${{secrets.TRELLO_ENV_CI_BASEURL}}
         TRELLO_API_CI_KEY: ${{secrets.TRELLO_API_CI_KEY}}
@@ -55,7 +52,7 @@ jobs:
     - name: 📊Generate Allure Report for ${{ matrix.browser }}
       if: always()
       run: |
-        yarn allure:gen:${{ matrix.browser }}
+        bun run allure:gen:${{ matrix.browser }}
 
     - name: 📡Upload Artifact - Allure Report for ${{ matrix.browser }}
       uses: actions/upload-artifact@v4
@@ -88,7 +85,7 @@ jobs:
         fi
 
     - name: ✅Import Test Results to Xray TX -- ${{ env.TXID }} (${{ matrix.browser }})
-      if: always()
+      if: env.XRAY_CLIENT != '' && env.XRAY_SECRET != ''
       uses: mikepenz/xray-action@v3
       with:
         username: ${{secrets.XRAY_CLIENT_ID}}
@@ -99,6 +96,8 @@ jobs:
         projectKey: 'GX3'
       env:
         TXID: ${{ steps.setTestExecKey.outputs.TXID }}
+        XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_SECRET }}
+        XRAY_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
 
   Ari-Slack-Notification:
     needs: [RegressionTesting]
@@ -106,12 +105,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: 🔔Slack Notification of Done
-      if: always()
+      if: env.SLACK_WEBHOOK != ''
       uses: rtCamp/action-slack-notify@v2
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_USERNAME: Ari✨
-        SLACK_MESSAGE: ':test_tube: PLAYWRIGHT-BLACKHOLE: REGRESSION REPORT IMPORTED TO JIRA :rocket:'
+        SLACK_MESSAGE: ':test_tube: PLAYWRIGHT: REGRESSION RESULTS IMPORTED TO JIRA :rocket:'
         SLACK_COLOR: ${{ needs.RegressionTesting.result }}
         SLACK_ICON: https://image.cdn2.seaart.ai/2023-12-06/clo9g0h4msbc73ac2sog/99e1abc36f32945cd4bacf5ee7448e96194545f7_high.webp
 

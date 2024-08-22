@@ -32,10 +32,10 @@
     "allure:gen:edge": "allure generate --clean -o allure-report/edge",
     "allure:gen:iphone": "allure generate --clean -o allure-report/iphone",
     "allure:report": "npm run allure:open && allure open --host localhost --port 7070",
-    "prettier:check": "npx prettier --check tests/**/*.ts",
-    "prettier:fix": "npx prettier --write tests/**/*.ts",
-    "lint:check": "npx eslint tests/**/*.ts",
-    "lint:fix": "npx eslint --fix tests/**/*.ts"
+    "prettier:check": "npx prettier --check **/*.ts",
+    "prettier:fix": "npx prettier --write **/*.ts",
+    "lint:check": "npx eslint **/*.ts",
+    "lint:fix": "npx eslint --fix **/*.ts"
   },
   "keywords": [
     "playwright"
@@ -44,20 +44,20 @@
   "license": "ISC",
   "type": "module",
   "devDependencies": {
-    "@alex_neo/playwright-azure-reporter": "^1.8.0",
-    "@playwright/test": "^1.39.0",
-    "@types/lodash": "^4.14.202",
-    "@types/node": "20.9.0",
-    "@typescript-eslint/eslint-plugin": "6.11.0",
-    "@typescript-eslint/parser": "6.11.0",
-    "allure-commandline": "2.24.1",
-    "allure-playwright": "2.9.2",
-    "dotenv": "16.0.3",
-    "eslint": "8.53.0",
+    "@alex_neo/playwright-azure-reporter": "^1.9.1",
+    "@playwright/test": "^1.45.1",
+    "@types/lodash": "^4.17.6",
+    "@types/node": "20.14.9",
+    "@typescript-eslint/eslint-plugin": "7.15.0",
+    "@typescript-eslint/parser": "7.15.0",
+    "allure-commandline": "2.29.0",
+    "allure-playwright": "2.15.1",
+    "dotenv": "16.4.5",
+    "eslint": "9.6.0",
     "eslint-plugin-only-warn": "1.1.0",
     "eslint-plugin-prettier": "5.1.3",
     "lodash": "^4.17.21",
-    "prettier": "3.1.0",
-    "typescript": "5.2.2"
+    "prettier": "3.3.2",
+    "typescript": "5.5.3"
   }
 }

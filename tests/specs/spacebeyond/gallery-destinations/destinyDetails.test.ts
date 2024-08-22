@@ -1,7 +1,6 @@
 import { story, test, expect } from '@TestBase';
-import { Locator } from '@playwright/test';
+import type { Locator } from '@playwright/test';
 import type { CardMapType } from '@type/spaceBeyongTypes';
-
 
 story('Selecting a Card with Details', () => {
 	

@@ -5,7 +5,6 @@ dotenv.config();
 // Example using Setup/TearDown Precondition: https://playwright.dev/docs/test-global-setup-teardown
 export const STORAGE_STATE = 'tests/helper/auth/user.json';
 
-
 // See https://playwright.dev/docs/test-configuration.
 export default defineConfig({
 	// Test Repo Directory:
@@ -61,20 +60,22 @@ export default defineConfig({
 			name: 'chromium',
 			use: { ...devices['Desktop Chrome'], channel: 'chrome' },
 		},
-		/*{
-			//name: 'firefox',
-			//use: { ...devices['Desktop Firefox'] },
-		},
-		//* Test against branded browsers:
-		{
-			//name: 'edge',
-			//use: { ...devices['Desktop Edge'], channel: 'msedge' },
-		},
+    
+		//{
+		//	name: 'firefox',
+		//	use: { ...devices['Desktop Firefox'] },
+		//},
+		////* Test against branded browsers:
+		//{
+		//	name: 'edge',
+		//	use: { ...devices['Desktop Edge'], channel: 'msedge' },
+		//},
 		//* Test against mobile Devices:
-		{
-			//name: 'iphone',
-			//use: { ...devices['iPhone 14 Pro'] },
-		},*/
+		//{
+		//	name: 'iphone',
+		//	use: { ...devices['iPhone 14 Pro'] },
+		//},
+
 		{
 			name: 'super-precondition-example',
 			testMatch: /.*\.(test)\.(prc)\.(js|ts)/,

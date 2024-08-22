@@ -12,7 +12,7 @@ name: 🧪Pipeline SanityTest Execution
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 on:
   push:
-    branches: ['TuBranchAqui'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+    branches: ['GX3-2250elements-upload-and-download'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
 
 jobs:
   TestSuite:
@@ -40,24 +40,34 @@ jobs:
 
     - name: ✅ 🧪Test Suite Execution
       run: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-        bun run test:ci tests/elements/uploadDownload_example.test.ts
+        bun run test:ci tests/specs/elements/uploadDownload_GX3-2251.test.ts
 
     - name: 📊Generate Allure Report
       run: |
         bun run allure:open
 
+    - name: ✅Check if XRAY_CLIENT is Defined
+      if: always()
+      run: |
+        if [[ -z "${{ secrets.XRAY_CLIENT_ID }}" ]]; then
+          echo "XRAY_CLIENT_ID is not set. Please set it in the repository secrets to enable Slack notifications."
+        fi
+        if [[ -z "${{ secrets.XRAY_CLIENT_SECRET }}" ]]; then
+          echo "XRAY_CLIENT_SECRET is not set. Please set it in the repository secrets to enable Slack notifications."
+        fi
+
     - name: ✅Import Test Results to Xray
       if: env.XRAY_CLIENT != '' && env.XRAY_SECRET != ''
       uses: mikepenz/xray-action@v3
       with:
-        username: ${{ env.XRAY_CLIENT }}
-        password: ${{ env.XRAY_SECRET }}
+        username: ${{secrets.XRAY_CLIENT_ID}}
+        password: ${{secrets.XRAY_CLIENT_SECRET}}
         testFormat: 'junit'
         testPaths: 'test-junit-report/main-importer-report.xml'
-        testExecKey: 'GX3-1533' #!Cambiar a tu TX correspondiente.
+        testExecKey: 'GX3-2257' #!Cambiar a tu TX correspondiente.
         projectKey: 'GX3' #!Cambiar a tu Proyecto Level correspondiente.
       env:
-        XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_ID }}
+        XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_SECRET }}
         XRAY_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
 
     - name: 📡Upload Artifact - Allure Report
@@ -67,6 +77,13 @@ jobs:
         name: test-report
         path: allure-report
         retention-days: 15
+
+    - name: 🔔Check if SLACK_WEBHOOK is Defined
+      if: always()
+      run: |
+        if [[ -z "${{ secrets.SLACK_WEBHOOK }}" ]]; then
+          echo "SLACK_WEBHOOK is not set. Please set it in the repository secrets to enable Slack notifications."
+        fi
 
     - name: 🔔Slack Notification of Done
       if: env.SLACK_WEBHOOK != ''

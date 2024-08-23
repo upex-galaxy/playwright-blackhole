@@ -60,7 +60,7 @@ export default defineConfig({
 			name: 'chromium',
 			use: { ...devices['Desktop Chrome'], channel: 'chrome' },
 		},
-		
+    
 		//{
 		//	name: 'firefox',
 		//	use: { ...devices['Desktop Firefox'] },
@@ -75,6 +75,7 @@ export default defineConfig({
 		//	name: 'iphone',
 		//	use: { ...devices['iPhone 14 Pro'] },
 		//},
+
 		{
 			name: 'super-precondition-example',
 			testMatch: /.*\.(test)\.(prc)\.(js|ts)/,

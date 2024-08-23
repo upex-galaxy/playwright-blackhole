@@ -13,7 +13,7 @@
 	},
 	{
 		"fullName": "claud",
-		"email": "claudgmail.com",
+		"email": "claud@gmail.com",
 		"currentAddress": "caracas, venezuela",
 		"permanentAddress": "buenos aires argentina"
 	},
@@ -25,26 +25,29 @@
 	},
 	{
 		"fullName": "claud",
-		"email": "claud@",
+		"email": "claudgmail.com",
 		"currentAddress": "",
 		"permanentAddress": "buenos aires argentina"
 	},
 	{
 		"fullName": "claud",
 		"email": "claud@gmail.com",
-		"currentAddress": "",
-		"permanentAddress": "buenos aires argentina"
+		"currentAddress": "caracas, venezuela",
+		"permanentAddress": ""
 	},
 	{
 		"fullName": "claud",
+		"currentAddress": "caracas, venezuela"
+	},
+	{
+		"fullName": "claud",
+		"email": "claud@gmail.com"
+	},
+	{
+		"fullName": "",
 		"email": "",
 		"currentAddress": "caracas, venezuela",
 		"permanentAddress": ""
-	},
-	{
-		"fullName": "claud",
-		"email": "claud@gmail.com",
-		"currentAddress": "",
-		"permanentAddress": ""
 	}
+
 ]

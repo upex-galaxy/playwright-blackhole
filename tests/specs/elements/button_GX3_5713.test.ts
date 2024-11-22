@@ -41,8 +41,51 @@ await test.step('Validate Message',async()=>{
 	const messageDynamicClick = page.locator('#dynamicClickMessage')
 	 expect(messageDynamicClick).toHaveText(expectedMessage)
 	})
+
 	 
 })
+test('TC4:Validate every messages through the differents buttons', async ({ page }) => {
+		const expectedDoubleMessage = await test.step('Perform Double Click on Button', async () => {
+			await page.locator('#doubleClickBtn').dblclick();
+
+			const expectedMessage = 'You have done a double click';
+			
+			return expectedMessage;
+		});
+
+		await test.step('Validate Message', async () => {
+			const messageElement = page.locator('#doubleClickMessage');
+			await expect(messageElement).toHaveText(expectedDoubleMessage);
+		});
+
+		const expectedRightMessage = await test.step('Perform Right Click on Button', async () => {
+			await page.locator('#rightClickBtn').click({ button: 'right' });
+
+			const expectedMessage = 'You have done a right click';
+			
+			return expectedMessage;
+		});
+
+		await test.step('Validate Message', async () => {
+			const messageElement = page.locator('#rightClickMessage');
+			await expect(messageElement).toHaveText(expectedRightMessage);
+		});
+
+		const expectedMessage = await test.step('Perform Simple Click on Button', async () => {
+			await page.getByText('Click Me', { exact: true }).click({ button: 'left' });
+
+			const expectedMessage = 'You have done a dynamic click';
+			
+			return expectedMessage;
+		});
+
+		await test.step('Validate Message', async () => {
+			const messageElement = page.locator('#dynamicClickMessage');
+			await expect(messageElement).toHaveText(expectedMessage);
+		});
+
+	});
+
 	
 })
 

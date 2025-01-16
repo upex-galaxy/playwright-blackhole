@@ -1,0 +1,62 @@
+[
+	{
+		"fullName": "John Doe",
+		"email": "user@mail.com",
+		"currentAddress": "123 Main St",
+		"permanentAddress": "456 Elm St"
+	},
+	{
+		"fullName": "John Doe",
+		"email": "@mail.com",
+		"currentAddress": "123 Main St",
+		"permanentAddress": "456 Elm St"
+	},
+	{
+		"fullName": "John Doe",
+		"email": "example@.com",
+		"currentAddress": "123 Main St",
+		"permanentAddress": "456 Elm St"
+	},
+	{
+		"fullName": "John Doe",
+		"email": "user!@mail.com",
+		"currentAddress": "123 Main St",
+		"permanentAddress": "456 Elm St"
+	},
+	{
+		"fullName": "John Doe",
+		"email": "examplemail@mailcom",
+		"currentAddress": "123 Main St",
+		"permanentAddress": "456 Elm St"
+	},
+	{
+		"fullName": "John Doe",
+		"email": "user@mail.co.uk",
+		"currentAddress": "123 Main St",
+		"permanentAddress": "456 Elm St"
+	},
+	{
+		"fullName": "John Doe",
+		"email": "maria @ mail . com",
+		"currentAddress": "123 Main St",
+		"permanentAddress": "456 Elm St"
+	},
+	{
+		"fullName": "John Doe",
+		"email": " example@mail.c",
+		"currentAddress": "123 Main St",
+		"permanentAddress": "456 Elm St"
+	},
+	{
+		"fullName": "   ",
+		"email": "examplemail.com",
+		"currentAddress": "123 Main St",
+		"permanentAddress": "456 Elm St"
+	},
+	{
+		"fullName": "j hon s ierra",
+		"email": "user@mail.com",
+		"currentAddress": "123 Main St",
+		"permanentAddress": "456 Elm St"
+	}
+]

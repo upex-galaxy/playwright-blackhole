@@ -8,11 +8,11 @@
 #todo: 6 -> Recuerda modificar el projectKey correspondiente, si estás en L3, debe ser GX3 y así...
 #todo: 7 -> Listo! Guarda los cambios (git add + git commit) y pushea (git push) para ejectutar este Pipeline!
 #*Resultado: Debería ejecutarse este Pipeline de GitHub Actions y correr cada uno de los Jobs declarados aquí.
-name: 🧪Pipeline SanityTest Execution
+name: 🧪Pipeline Vicky's SanityTest Execution
 run-name: ${{github.actor}}👨🏻‍🔬 triggered SanityTest in ${{github.ref_name}}
 on:
   push:
-    branches: ['GX3-3643-⚡️-tools-qa-elemennts-buttons'] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
+    branches: [ 'test/GX3-5713/tools_qa_elements_buttons' ] #! Cambia "TuBranchAqui" por el nombre de tu rama de tarea.
 
 jobs:
   TestSuite:
@@ -40,7 +40,7 @@ jobs:
 
     - name: ✅ 🧪Test Suite Execution
       run: | #todo: EDITAR AQUÍ EL ARCHIVO SUITE A EJECUTAR:
-        bun run test:ci tests/elements/button_GX3_3643.test.ts
+        bun run test:ci tests/specs/elements/button_GX3_5713.test.ts
 
     - name: 📊Generate Allure Report
       run: |
@@ -54,7 +54,7 @@ jobs:
         password: ${{ env.XRAY_SECRET }}
         testFormat: 'junit'
         testPaths: 'test-junit-report/main-importer-report.xml'
-        testExecKey: 'GX3-3650' #!Cambiar a tu TX correspondiente.
+        testExecKey: 'GX3-5717' #!Cambiar a tu TX correspondiente.
         projectKey: 'GX3' #!Cambiar a tu Proyecto Level correspondiente.
       env:
         XRAY_CLIENT: ${{ secrets.XRAY_CLIENT_ID }}

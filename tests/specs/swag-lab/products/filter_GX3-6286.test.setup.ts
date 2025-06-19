@@ -22,15 +22,14 @@ story('GX3-6286: Swag Lab - Filter products of PLP ', async () => {
 	});
 
 	test('TC1:User filters products by name in descending order', async ({ swagFilter })=>{
-		console.log('🎭️ ---- Starting first test');
+		console.log('🎭️ ---- Starting TC1');
 		await swagFilter.selectFilter("za");
 		const itemNames = await swagFilter.getItemNames();
-		console.log(itemNames);
 		await swagFilter.validateItems(expectedItemsZA);
 	});
 
 	test('TC2:User filters products by name ascending order', async ({ swagFilter })=>{
-		console.log('🎭️ ---- Starting Setup: Login Session');
+		console.log('🎭️ ---- Starting TC2');
 		await swagFilter.selectFilter("az");
 		const itemNames = await swagFilter.getItemNames();
 		console.log(itemNames);
@@ -38,7 +37,7 @@ story('GX3-6286: Swag Lab - Filter products of PLP ', async () => {
 	});
 
 	test('TC3:User filters product by price in ascending order', async ({ swagFilter })=>{
-		console.log('🎭️ ---- Starting Setup: Login Session');
+		console.log('🎭️ ---- Starting TC3');
 		await swagFilter.selectFilter("lohi");
 		const itemNames = await swagFilter.getItemNames();
 		console.log(itemNames);
@@ -47,7 +46,7 @@ story('GX3-6286: Swag Lab - Filter products of PLP ', async () => {
 	});
 
 	test('TC4:User filters product by price in descending order', async ({ swagFilter })=>{
-		console.log('🎭️ ---- Starting Setup: Login Session');
+		console.log('🎭️ ---- Starting TC4');
 		await swagFilter.selectFilter("hilo");
 		const itemNames = await swagFilter.getItemNames();
 		console.log(itemNames);

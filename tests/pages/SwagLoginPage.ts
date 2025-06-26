@@ -11,6 +11,7 @@ export class SwagLoginPage extends SuperPageSwag {
 	passwordInput: () => Locator;
 	loginButton: () => Locator;
 	titlePage: () => Locator;
+	errorMessage: () => Locator;
 
 	constructor(driver: Page) {
 		super(driver);
@@ -18,13 +19,14 @@ export class SwagLoginPage extends SuperPageSwag {
 		this.passwordInput = () => this.page.locator('[data-test="password"]');
 		this.loginButton = () => this.page.locator('[data-test="login-button"]');
 		this.titlePage = () => this.page.locator('.login_logo');
+		this.errorMessage = () => this.page.locator('[data-test="error"]');
 	}
 
 	async enterUsername(usernameValue: string) {
-		await this.usernameInput().fill("standard_user");
+		await this.usernameInput().fill(usernameValue);
 	}
 	async enterPassword(passwordValue: string) {
-		await this.passwordInput().fill("secret_sauce");
+		await this.passwordInput().fill(passwordValue);
 	}
 	async submitLogin() {
 		await this.loginButton().click();
@@ -47,10 +49,21 @@ export class SwagLoginPage extends SuperPageSwag {
 		
 	}
 
-	async loginSuccess() {
-		const username = actualUsername;
-		const password = actualPassword;
-		await this.login(username, password);
-		expect(this.page.url()).toBe('https://www.saucedemo.com/inventory.html');
+	async getErrorMessage(){
+		const errorMessageLocator = this.errorMessage();
+		await expect(errorMessageLocator).toBeVisible();
+		return this.errorMessage().textContent()
 	}
+
+	async accesstoPages( url: string){
+		await this.page.goto(url);
+		await expect(this.page).toHaveURL(`https://www.saucedemo.com`)
+	}
+
+	async getExpectedAccessError(url: string) {
+  		const path = new URL(url).pathname;
+ 		return `Epic sadface: You can only access '${path}' when you are logged in.`;
+	}
+
+
 }

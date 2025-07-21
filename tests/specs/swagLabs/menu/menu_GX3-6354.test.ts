@@ -2,7 +2,7 @@ import { story, test, precondition, expect } from '@pages/TestBase';
 
 
 
-story('GX3-6312: [Automation] SwagLabs | Checkout Info | Insertar información del comprador', async () => {
+story('GX3-6354: [Automation] SwagLabs | Menu | Hacer varias Acciones desde un Burger Menu', async () => {
 	precondition( async ({ swagLoginPage }) => {
 		console.log('🎭️ ---- Starting precondition');
 		await swagLoginPage.gotoPage();
